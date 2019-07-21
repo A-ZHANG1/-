@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="291be2a8-fc77-40c2-8844-c1a993b0bc47" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/javaBasic.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/StacksAndQueues/TwoStacksQueue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/StacksAndQueues/P_1003_ReverseStackUsingRecursive.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/javaBasic.md" beforeDir="false" afterPath="$PROJECT_DIR$/resources/javaBasic.md" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -57,14 +57,26 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/StacksAndQueues/TwoStacksQueue.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+            <state relative-caret-position="-305">
+              <caret line="11" column="29" lean-forward="true" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
               <folding>
                 <element signature="e#486#487#0" expanded="true" />
                 <element signature="e#505#506#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/StacksAndQueues/P_1003_ReverseStackUsingRecursive.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="31" column="22" lean-forward="true" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
+              <folding>
+                <element signature="e#782#791#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -74,8 +86,8 @@
         <entry file="file://$PROJECT_DIR$/resources/javaBasic.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="85">
-                <caret line="5" column="20" lean-forward="true" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
+              <first_editor relative-caret-position="119">
+                <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
               </first_editor>
               <second_editor />
             </state>
@@ -116,8 +128,9 @@
         <option value="$PROJECT_DIR$/resources/Stack.md" />
         <option value="$PROJECT_DIR$/src/Stacks.java" />
         <option value="$PROJECT_DIR$/src/MyStack1.java" />
-        <option value="$PROJECT_DIR$/resources/javaBasic.md" />
         <option value="$PROJECT_DIR$/src/StacksAndQueues/TwoStacksQueue.java" />
+        <option value="$PROJECT_DIR$/resources/javaBasic.md" />
+        <option value="$PROJECT_DIR$/src/StacksAndQueues/P_1003_ReverseStackUsingRecursive.java" />
       </list>
     </option>
   </component>
@@ -127,7 +140,9 @@
     <option name="width" value="878" />
     <option name="height" value="793" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -187,7 +202,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.TwoStacksQueue">
+  <component name="RunManager" selected="Application.P_1003_ReverseStackUsingRecursive">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="alg" />
@@ -201,6 +216,19 @@
     <configuration name="MyStack1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="StacksAndQueues.MyStack1" />
       <module name="alg" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="P_1003_ReverseStackUsingRecursive" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="StacksAndQueues.P_1003_ReverseStackUsingRecursive" />
+      <module name="alg" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="StacksAndQueues.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -220,6 +248,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.P_1003_ReverseStackUsingRecursive" />
         <item itemvalue="Application.TwoStacksQueue" />
         <item itemvalue="Application.MyStack1" />
         <item itemvalue="Application.Main" />
@@ -241,7 +270,7 @@
       <workItem from="1562575397529" duration="851000" />
       <workItem from="1563154264058" duration="1259000" />
       <workItem from="1563627828027" duration="427000" />
-      <workItem from="1563691733549" duration="8152000" />
+      <workItem from="1563691733549" duration="13398000" />
     </task>
     <task id="LOCAL-00001" summary="feat: 1001 &amp; 相关整理更新">
       <created>1563699788046</created>
@@ -257,17 +286,24 @@
       <option name="project" value="LOCAL" />
       <updated>1563699822032</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feat: 1002">
+      <created>1563701911297</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1563701911297</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25877000" />
+    <option name="totallyTimeSpent" value="31123000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-31" y="28" width="878" height="793" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2631579" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2631579" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -276,7 +312,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3281027" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3281027" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -305,7 +341,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: 1001 &amp; 相关整理更新" />
     <MESSAGE value="refactor: gitignore文件" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: gitignore文件" />
+    <MESSAGE value="feat: 1002" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 1002" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Main.java">
@@ -362,8 +399,8 @@
     <entry file="file://$PROJECT_DIR$/resources/javaBasic.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="85">
-            <caret line="5" column="20" lean-forward="true" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
+          <first_editor relative-caret-position="119">
+            <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
           </first_editor>
           <second_editor />
         </state>
@@ -371,11 +408,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/StacksAndQueues/TwoStacksQueue.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+        <state relative-caret-position="-305">
+          <caret line="11" column="29" lean-forward="true" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
           <folding>
             <element signature="e#486#487#0" expanded="true" />
             <element signature="e#505#506#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StacksAndQueues/P_1003_ReverseStackUsingRecursive.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="31" column="22" lean-forward="true" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
+          <folding>
+            <element signature="e#782#791#0" expanded="true" />
           </folding>
         </state>
       </provider>
