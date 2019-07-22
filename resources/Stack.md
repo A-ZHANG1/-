@@ -1,4 +1,4 @@
-栈
+栈和队列
 ====
 *数据结构（C++语言版）清华*
 
@@ -17,3 +17,8 @@
    2. 无论是递归还是迭代，逆序计算出
    3. 输入输出规模不确定，难以事先确定容器大小
 
++ 队列queue用LinkedList实现
+
+    Queue<String> queue = new LinkedList<String>();
++ [LinkedList基本操作](https://www.geeksforgeeks.org/linked-list-in-java/)
+    remove(),add(),contains(),indexOf(),get(index)...
