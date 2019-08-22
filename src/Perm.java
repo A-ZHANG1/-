@@ -4,8 +4,7 @@
  *  归结到递归解全排列问题
  */
 //输出最大时间
-import java.util.HashMap;
-import java.util.Scanner;
+
 class Perm{
     int[]  result=new int[6];
     int max;
@@ -22,9 +21,6 @@ class Perm{
             int ss = result[4]*10+result[5];
             int curr = hh*10000+mm*100+ss;
             max = 0;
-//            System.out.println(hh);
-//            System.out.println(mm);
-//            System.out.println(ss);
 
             if(hh <24 && mm <60 && ss<60 && curr > max){
                 max = curr;

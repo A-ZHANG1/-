@@ -2,7 +2,7 @@ import java.util.Stack;
 
 /**
  * Created by Wayne.A.Z on 2019-07-08.
- * 程序员代码面试指南，链表问题
+ * 程序员代码面试指南，链表相关问题
  *
  * */
 public class LinkedList {
