@@ -53,7 +53,7 @@ public class LinkedList {
             return head;
         }
         Node last = head;
-        while(last.next  != head){
+        while(last.next != head){
             last = last.next;
         }
         int count = 0;
@@ -76,7 +76,7 @@ public class LinkedList {
             s.push(cur);
             cur = cur.next;
         }
-        while( head.next != head){
+        while(head.next != head){
             if(s.pop().value != head.value){
                 return false;
             }
@@ -106,5 +106,6 @@ public class LinkedList {
         }
         return true;
     }
+
 }
 

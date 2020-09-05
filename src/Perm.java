@@ -34,7 +34,7 @@ class Perm{
                 temp = A[i];    //置第i个位置的元素为排头元素
                 A[i] = A[k];
                 A[k] = temp;
-                perm(A, k + 1, n);   //递归求排头元素外的n-1个元素的全排列
+                perm(A, k + 1, n);   //递归求排头元素外的n-k+1个元素的全排列
                 temp = A[i];       //将排头回归第i个位置
                 A[i] = A[k];
                 A[k] = temp;

@@ -38,7 +38,7 @@ public static int[] getMaxWindowStack(int[] arr, int w){
     LinkedList<Integer> qmax = new LinkedList<>();
     int[] res = new int[arr.length - w +1];
     for(int i = 0; i < arr.length; i++){
-        //todo:即使看懂了算法思路也没想到怎么implment
+        //todo:即使看懂了算法思路也没想到怎么implement
         res[i] = qmax.pollFirst();
     }
     return res;

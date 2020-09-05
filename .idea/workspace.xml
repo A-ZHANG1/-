@@ -2,12 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="291be2a8-fc77-40c2-8844-c1a993b0bc47" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/StacksAndQueues/P_1006_SlidingWindowMaxArray.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/StacksAndQueues/P_1007_MaxTree.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Meituan.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Solution.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Solution_LinkedList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Solution_Tree.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Trie.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Twitter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Weiruan.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/alg/Perm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/alg/Perm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/alg/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/alg/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LinkedList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Perm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Perm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StacksAndQueues/MyStack1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StacksAndQueues/MyStack1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StacksAndQueues/P_1006_SlidingWindowMaxArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StacksAndQueues/P_1006_SlidingWindowMaxArray.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,37 +30,62 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/LinkedList.java">
+        <entry file="file://$PROJECT_DIR$/src/Weiruan.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="24" column="2" selection-start-line="24" selection-start-column="2" selection-end-line="24" selection-end-column="2" />
+            <state relative-caret-position="1785">
+              <caret line="105" selection-start-line="105" selection-end-line="122" selection-end-column="32" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Perm.java">
+        <entry file="file://$PROJECT_DIR$/src/Meituan.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+            <state relative-caret-position="680">
+              <caret line="43" column="25" selection-start-line="43" selection-start-column="25" selection-end-line="43" selection-end-column="25" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/StacksAndQueues/MyStack1.java">
+        <entry file="file://$PROJECT_DIR$/src/Solution_graph.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="25" column="9" lean-forward="true" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
+            <state relative-caret-position="371">
+              <caret line="286" selection-start-line="285" selection-end-line="286" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/StacksAndQueues/P_1006_SlidingWindowMaxArray.java">
+        <entry file="file://$PROJECT_DIR$/src/Solution_Tree.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="39" column="40" lean-forward="true" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
+            <state relative-caret-position="4488">
+              <caret line="273" column="41" selection-start-line="273" selection-start-column="41" selection-end-line="273" selection-end-column="41" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#302#303#0" expanded="true" />
+                <element signature="e#340#341#0" expanded="true" />
+                <element signature="e#4356#4357#0" expanded="true" />
+                <element signature="e#4410#4411#0" expanded="true" />
+                <element signature="e#5060#5061#0" expanded="true" />
+                <element signature="e#5095#5096#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Solution.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="18462">
+              <caret line="1099" column="50" selection-start-line="1099" selection-start-column="50" selection-end-line="1099" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -61,63 +94,34 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/StacksAndQueues/P_1007_MaxTree.java">
+        <entry file="file://$PROJECT_DIR$/src/Solution_LinkedList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="31" selection-end-line="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/StacksAndQueues/TwoStacksQueue.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" selection-start-line="13" selection-end-line="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/StacksAndQueues/P_1003_ReverseStackUsingRecursive.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="635">
-              <caret line="43" column="26" selection-start-line="43" selection-start-column="26" selection-end-line="43" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/StacksAndQueues/P_1004_DogCatQueue.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="73" column="24" lean-forward="true" selection-start-line="73" selection-start-column="24" selection-end-line="73" selection-end-column="24" />
+            <state relative-caret-position="192">
+              <caret line="271" column="28" lean-forward="true" selection-start-line="271" selection-start-column="28" selection-end-line="271" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2335#2336#0" expanded="true" />
-                <element signature="e#2406#2407#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/StacksAndQueues/P_1005_sortStackByStack.java">
+        <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="82">
-              <caret line="11" column="34" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
+            <state relative-caret-position="85">
+              <caret line="6" column="58" selection-start-line="6" selection-start-column="58" selection-end-line="6" selection-end-column="58" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/Stack.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="391">
-                <caret line="23" column="53" selection-start-line="23" selection-start-column="53" selection-end-line="23" selection-end-column="53" />
-              </first_editor>
-              <second_editor />
+        <entry file="file://$PROJECT_DIR$/src/Perm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="527">
+              <caret line="31" column="37" selection-start-line="31" selection-start-column="37" selection-end-line="31" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -132,13 +136,51 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>toString</find>
+      <find>serialize</find>
+      <find>decodeString</find>
+      <find>calculate</find>
+      <find>消消乐</find>
+      <find>copyOfRange</find>
+      <find>copy</find>
+      <find>maxCoins</find>
+      <find>minWindow</find>
+      <find>countSubstrings</find>
+      <find>convert</find>
+      <find>pancake</find>
+      <find>myAtoi</find>
+      <find>10</find>
+      <find>isMatch44</find>
+      <find>productExceptSelf</find>
+      <find>15</find>
+      <find>twoSum</find>
+      <find>threeSum</find>
+      <find>26</find>
+      <find>removeDuplicates</find>
+      <find>divide</find>
+      <find>findSubstring</find>
+      <find>getPermutation</find>
+      <find>46</find>
+      <find>dfs</find>
+      <find>floodFill</find>
+      <find>trie</find>
+      <find>[</find>
+      <find>]</find>
+    </findStrings>
+    <replaceStrings>
+      <replace />
+      <replace>{</replace>
+      <replace>}</replace>
+    </replaceStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/Node.java" />
         <option value="$PROJECT_DIR$/src/Stacks.java" />
         <option value="$PROJECT_DIR$/src/MyStack1.java" />
@@ -148,18 +190,36 @@
         <option value="$PROJECT_DIR$/resources/Stack.md" />
         <option value="$PROJECT_DIR$/src/StacksAndQueues/P_1004_DogCatQueue.java" />
         <option value="$PROJECT_DIR$/src/StacksAndQueues/P_1005_sortStackByStack.java" />
-        <option value="$PROJECT_DIR$/src/LinkedList.java" />
+        <option value="$PROJECT_DIR$/src/StacksAndQueues/P_1007_MaxTree.java" />
+        <option value="$PROJECT_DIR$/src/StacksAndQueues/Solution_1122.java" />
         <option value="$PROJECT_DIR$/src/Perm.java" />
         <option value="$PROJECT_DIR$/src/StacksAndQueues/P_1006_SlidingWindowMaxArray.java" />
-        <option value="$PROJECT_DIR$/src/StacksAndQueues/P_1007_MaxTree.java" />
+        <option value="$PROJECT_DIR$/src/StacksAndQueues/MyStack1.java" />
+        <option value="$PROJECT_DIR$/src/spark.java" />
+        <option value="$PROJECT_DIR$/src/LinkedList.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/Twitter.java" />
+        <option value="$PROJECT_DIR$/src/Meituan.java" />
+        <option value="$PROJECT_DIR$/src/Weiruan.java" />
+        <option value="$PROJECT_DIR$/src/Trie.java" />
+        <option value="$PROJECT_DIR$/src/Solution.java" />
+        <option value="$PROJECT_DIR$/src/Solution_Tree.java" />
+        <option value="$PROJECT_DIR$/src/Solution_graph.java" />
+        <option value="$PROJECT_DIR$/src/Solution_LinkedList.java" />
       </list>
     </option>
   </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
+  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="444" />
-    <option name="y" value="45" />
-    <option name="width" value="1052" />
-    <option name="height" value="794" />
+    <option name="x" value="624" />
+    <option name="y" value="23" />
+    <option name="width" value="816" />
+    <option name="height" value="877" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -188,9 +248,7 @@
             </path>
             <path>
               <item name="alg" type="b2602c69:ProjectViewProjectNode" />
-              <item name="alg" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="StacksAndQueues" type="462c0819:PsiDirectoryNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
@@ -210,6 +268,8 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -223,70 +283,49 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.P_1006_SlidingWindowMaxArray">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="alg" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MyStack1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="StacksAndQueues.MyStack1" />
+  <component name="RunManager" selected="Application.Solution_LinkedList">
+    <configuration name="Solution" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Solution" />
       <module name="alg" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="P_1003_ReverseStackUsingRecursive" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="StacksAndQueues.P_1003_ReverseStackUsingRecursive" />
+    <configuration name="Solution_LinkedList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Solution_LinkedList" />
       <module name="alg" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="StacksAndQueues.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="P_1006_SlidingWindowMaxArray" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="StacksAndQueues.P_1006_SlidingWindowMaxArray" />
+    <configuration name="Solution_Tree" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Solution_Tree" />
       <module name="alg" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="StacksAndQueues.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TwoStacksQueue" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="StacksAndQueues.TwoStacksQueue" />
+    <configuration name="Solution_graph" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Solution_graph" />
       <module name="alg" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="StacksAndQueues.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Trie" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Trie" />
+      <module name="alg" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.P_1006_SlidingWindowMaxArray" />
-        <item itemvalue="Application.P_1003_ReverseStackUsingRecursive" />
-        <item itemvalue="Application.TwoStacksQueue" />
-        <item itemvalue="Application.MyStack1" />
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Solution_LinkedList" />
+        <item itemvalue="Application.Solution_graph" />
+        <item itemvalue="Application.Solution" />
+        <item itemvalue="Application.Solution_Tree" />
+        <item itemvalue="Application.Trie" />
       </list>
     </recent_temporary>
   </component>
@@ -308,7 +347,52 @@
       <workItem from="1563691733549" duration="19543000" />
       <workItem from="1563769335574" duration="3264000" />
       <workItem from="1566013918480" duration="6395000" />
-      <workItem from="1566429788783" duration="4450000" />
+      <workItem from="1566429788783" duration="4506000" />
+      <workItem from="1566627539689" duration="132000" />
+      <workItem from="1566864961016" duration="1900000" />
+      <workItem from="1566902887321" duration="876000" />
+      <workItem from="1586740201590" duration="4067000" />
+      <workItem from="1587802754942" duration="228000" />
+      <workItem from="1592037691591" duration="6906000" />
+      <workItem from="1592450693880" duration="79250000" />
+      <workItem from="1593171549935" duration="6234000" />
+      <workItem from="1593210348314" duration="23029000" />
+      <workItem from="1593389543480" duration="21995000" />
+      <workItem from="1593840502833" duration="2269000" />
+      <workItem from="1593857079549" duration="3226000" />
+      <workItem from="1594001951039" duration="9372000" />
+      <workItem from="1594176529183" duration="33696000" />
+      <workItem from="1594778743167" duration="15233000" />
+      <workItem from="1594974092925" duration="7944000" />
+      <workItem from="1595379196482" duration="39211000" />
+      <workItem from="1596096836288" duration="18499000" />
+      <workItem from="1596460767644" duration="2518000" />
+      <workItem from="1596641754087" duration="97000" />
+      <workItem from="1596674296145" duration="3892000" />
+      <workItem from="1596781523292" duration="11095000" />
+      <workItem from="1596940407517" duration="22118000" />
+      <workItem from="1597163075545" duration="2086000" />
+      <workItem from="1597317728393" duration="906000" />
+      <workItem from="1597392634877" duration="247000" />
+      <workItem from="1597400227798" duration="5680000" />
+      <workItem from="1597443739009" duration="45112000" />
+      <workItem from="1597664785837" duration="3305000" />
+      <workItem from="1597710223960" duration="985000" />
+      <workItem from="1597796135298" duration="491000" />
+      <workItem from="1597802628448" duration="1140000" />
+      <workItem from="1597834363068" duration="4725000" />
+      <workItem from="1597921692866" duration="4926000" />
+      <workItem from="1597967336392" duration="1538000" />
+      <workItem from="1598017513798" duration="13221000" />
+      <workItem from="1598269693696" duration="1834000" />
+      <workItem from="1598357773390" duration="5290000" />
+      <workItem from="1598440587908" duration="2594000" />
+      <workItem from="1598664950644" duration="852000" />
+      <workItem from="1598665821551" duration="22889000" />
+      <workItem from="1598879055372" duration="2127000" />
+      <workItem from="1598971100056" duration="315000" />
+      <workItem from="1599059170425" duration="1177000" />
+      <workItem from="1599269005537" duration="1002000" />
     </task>
     <task id="LOCAL-00001" summary="feat: 1001 &amp; 相关整理更新">
       <created>1563699788046</created>
@@ -352,16 +436,31 @@
       <option name="project" value="LOCAL" />
       <updated>1563772866740</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="feat: 最近做的左程云的一些implement和修改。考虑用剑指offer看看">
+      <created>1566461223762</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1566461223762</updated>
+    </task>
+    <task id="LOCAL-00008" summary="feat: leetcode1122 数组计数排序">
+      <created>1566903700517</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1566903700517</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51377000" />
+    <option name="totallyTimeSpent" value="487662000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="444" y="45" width="1052" height="794" extended-state="0" />
+    <frame x="624" y="23" width="816" height="877" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24356435" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2248062" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -370,26 +469,26 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3048433" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.498366" visible="true" weight="0.24840765" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39973614" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="8" visible="true" weight="0.2948718" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.2369146" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.28062677" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.3281027" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.15031847" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.501634" side_tool="true" weight="0.32356688" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.21910828" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Maven" order="6" />
-      <window_info anchor="right" id="Capture Analysis" order="7" />
-      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Maven" order="8" weight="0.32978722" />
       <window_info anchor="right" id="SciView" order="9" />
     </layout>
   </component>
@@ -403,11 +502,13 @@
     <MESSAGE value="feat: 1003" />
     <MESSAGE value="feat: 1004" />
     <MESSAGE value="feat: 1005" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 1005" />
+    <MESSAGE value="feat: 最近做的左程云的一些implement和修改。考虑用剑指offer看看" />
+    <MESSAGE value="feat: leetcode1122 数组计数排序" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: leetcode1122 数组计数排序" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Node.java" />
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/StacksAndQueues/TwoStacksQueue.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="13" selection-start-line="13" selection-end-line="13" />
@@ -417,31 +518,17 @@
     <entry file="file://$PROJECT_DIR$/resources/javaBasic.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="187">
-            <caret line="11" column="2" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
+          <first_editor relative-caret-position="102">
+            <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
           </first_editor>
           <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/LinkedList.java">
+    <entry file="file://$PROJECT_DIR$/src/StacksAndQueues/P_1005_sortStackByStack.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="24" column="2" selection-start-line="24" selection-start-column="2" selection-end-line="24" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Perm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/StacksAndQueues/TwoStacksQueue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        <state relative-caret-position="187">
+          <caret line="11" column="34" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -455,43 +542,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/StacksAndQueues/P_1005_sortStackByStack.java">
+    <entry file="file://$PROJECT_DIR$/src/StacksAndQueues/Solution_1122.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="11" column="34" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
+        <state relative-caret-position="204">
+          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/StacksAndQueues/MyStack1.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="25" column="9" lean-forward="true" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
+        <state relative-caret-position="799">
+          <caret line="47" column="22" selection-start-line="47" selection-end-line="48" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/StacksAndQueues/P_1003_ReverseStackUsingRecursive.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="635">
-          <caret line="43" column="26" selection-start-line="43" selection-start-column="26" selection-end-line="43" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/StacksAndQueues/P_1004_DogCatQueue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="73" column="24" lean-forward="true" selection-start-line="73" selection-start-column="24" selection-end-line="73" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2335#2336#0" expanded="true" />
-            <element signature="e#2406#2407#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/spark.java" />
     <entry file="file://$PROJECT_DIR$/src/StacksAndQueues/P_1006_SlidingWindowMaxArray.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="39" column="40" lean-forward="true" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
+        <state relative-caret-position="867">
+          <caret line="54" column="4" selection-start-line="54" selection-start-column="4" selection-end-line="54" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -500,8 +569,161 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/StacksAndQueues/P_1007_MaxTree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="31" selection-end-line="35" />
+        <state relative-caret-position="204">
+          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LinkedList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="25" column="29" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StacksAndQueues/P_1003_ReverseStackUsingRecursive.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StacksAndQueues/P_1004_DogCatQueue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="62" column="16" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2335#2336#0" expanded="true" />
+            <element signature="e#2406#2407#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home/src.zip!/java/util/AbstractCollection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="195" column="17" selection-start-line="195" selection-start-column="17" selection-end-line="195" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home/src.zip!/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="411" selection-start-line="411" selection-end-line="411" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home/src.zip!/java/lang/NumberFormatException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="64" column="15" selection-start-line="64" selection-start-column="15" selection-end-line="64" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Twitter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1972">
+          <caret line="116" column="32" selection-start-line="116" selection-start-column="32" selection-end-line="116" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Trie.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="40" column="16" selection-start-line="40" selection-start-column="16" selection-end-line="40" selection-end-column="16" />
+          <folding>
+            <element signature="e#352#353#0" expanded="true" />
+            <element signature="e#389#390#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home/src.zip!/java/lang/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="657" column="18" selection-start-line="657" selection-start-column="18" selection-end-line="657" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Weiruan.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1785">
+          <caret line="105" selection-start-line="105" selection-end-line="122" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Meituan.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="43" column="25" selection-start-line="43" selection-start-column="25" selection-end-line="43" selection-end-column="25" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Solution_Tree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4488">
+          <caret line="273" column="41" selection-start-line="273" selection-start-column="41" selection-end-line="273" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#302#303#0" expanded="true" />
+            <element signature="e#340#341#0" expanded="true" />
+            <element signature="e#4356#4357#0" expanded="true" />
+            <element signature="e#4410#4411#0" expanded="true" />
+            <element signature="e#5060#5061#0" expanded="true" />
+            <element signature="e#5095#5096#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Solution.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18462">
+          <caret line="1099" column="50" selection-start-line="1099" selection-start-column="50" selection-end-line="1099" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="6" column="58" selection-start-line="6" selection-start-column="58" selection-end-line="6" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Perm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="37" selection-start-line="31" selection-start-column="37" selection-end-line="31" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Solution_graph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="371">
+          <caret line="286" selection-start-line="285" selection-end-line="286" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Solution_LinkedList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="271" column="28" lean-forward="true" selection-start-line="271" selection-start-column="28" selection-end-line="271" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

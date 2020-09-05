@@ -15,7 +15,7 @@ public class MyStack1 {
 
     public MyStack1() {
         this.stackData = new Stack<>();
-        this.stackMin = new  Stack<>();
+        this.stackMin = new Stack<>();
     }
 
     public void push(int value) {
