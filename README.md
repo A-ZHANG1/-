@@ -51,4 +51,31 @@ leetcode每日一题
 
 + 计数排序 及变形： https://www.runoob.com/w3cnote/counting-sort.html
 
+## Indexed Tree
+Tree with pre and suf pointer.
+Inorder Traverse a tree by making it an indexed tree.
+```java
+// non-iterative
+public List<Integer> inorderTraversal(TreeNode root){
+  List<Integer> res = new ArrayList<>();
+  Deque<TreeNode> stack = new ArrayDeque<>();
+  TreeNode cur = root;
+  while(cur != null){
+    if(cur.left == null){
+      res.add(cur.val);
+      cur = cur.right;
+      }else{
+        pre = cur.left;
+      }
+      pre.right = cur;
+      TreeNode tmp = cur;
+      cur = cur.left;
+      tmp.left = null;
+      }
+   }
+   return res;
+}
+```
+
+
 ## Python基本语法相关
