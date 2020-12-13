@@ -118,7 +118,7 @@ public class Solution {
                 res += nums[r] - nums[i] + 1;
                 nums[r] = nums[i] - 1;
             }
-            System.out.println(java.util.Arrays.toString(nums)); // 打印数组元素debug
+            System.out.println(Arrays.toString(nums)); // 打印数组元素debug
         }
         return res;
     }
@@ -265,26 +265,6 @@ public class Solution {
         }
         return res;
     }
-    // 139 单词能拆解成字典 dp
-    public boolean wordBreak(String s, List<String> wordDict) {
-        boolean[] dp = new boolean[s.length() + 1];
-        dp[0] = true;
-        for(int i = 1;i < s.length() + 1;i ++){
-            for(int j = i;j >= 0;j --) {
-                String word = s.substring(j, i);
-//                if(word.equals("code")){ // == 比较对象内存地址
-//                    System.out.println(j);
-//                    System.out.println(java.util.Arrays.toString(dp));
-//                }
-                if(wordDict.contains(word) && dp[j] == true){ // dp[j]:[0, j-1]在字典中能截取
-                    dp[i] = true;
-                    break;
-                }
-            }
-        }
-//        System.out.println(wordDict.contains("code"));
-        return dp[s.length()];
-    }
 
     // 695 java 岛屿最大面积
     public int maxAreaOfIsland(int[][] grid) {
@@ -322,6 +302,20 @@ public class Solution {
             }
         }
         return nums.length - 1;
+    }
+    // 287
+    public int findDuplicate(int[] nums){
+        int l = 0, r = nums.length;
+        while(l < r) {
+            int mid  = l + (r - l) / 2;
+            int cnt = 0;
+            for(int n : nums) {
+                if (n <= nums[mid]) cnt++;
+            }
+            if(cnt <= mid) l = mid + 1;
+            else r = mid;
+        }
+        return l;
     }
 
     // 剑指 42
@@ -450,6 +444,38 @@ public class Solution {
 //        map.put(input, res);
 //        return res;
 //    }
+    Map<String, List<Integer>> map241 = new HashMap<>();
+    public List<Integer> diffWaysToCompute(String input) {
+        if(map241.containsKey(input)) return map241.get(input);
+
+        int len = input.length();
+        List<Integer> res = new ArrayList<>();
+
+        for(int i = 0;i < len;i ++){
+            char c = input.charAt(i);
+            if( c == '+' ||  c == '-' ||  c == '*'){
+                List<Integer> left = diffWaysToCompute(input.substring(0, i));
+                List<Integer> right = diffWaysToCompute(input.substring(i + 1, len));
+
+                for(int l: left){
+                    for(int r: right){
+                        switch(c){
+                            case '+': res.add(l + r);break;
+                            case '-': res.add(l - r);break;
+                            case '*': res.add(l * r);
+                        }
+                    }
+                }
+            }
+        }
+
+        if(res.size() == 0) {
+            System.out.println(input);
+            res.add(Integer.valueOf(input));
+        }
+        map241.put(input, res);
+        return res;
+    }
 
     // 209 O(n) 双指针
     public int minSubArrayLen(int s, int[] nums) {
@@ -472,6 +498,34 @@ public class Solution {
         }
         return res == Integer.MAX_VALUE? 0: res;
     }
+
+    // 240
+    // TODO: 法二： https://www.cnblogs.com/grandyang/p/4669134.html
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int M = matrix.length, N = matrix[0].length;
+//        while (l < r){
+//            int mid = l + (r - l) / 2;
+//            if(matrix[mid][N - 1] < target) l = mid + 1;
+//            else r = mid;
+//        }
+//        System.out.println(l);
+        for (int i = 0; i < M; i++) {
+            if(matrix[i][0] > target) continue;
+            if(matrix[i][N - 1] < target) continue;
+            if(binanrySearch(matrix[i], target)) return true;
+        }
+        return false;
+    }
+    public boolean binanrySearch(int[] nums, int target){
+        int l = 0, r = nums.length;
+        while(l < r){
+            int mid = l + (r - l) / 2;
+            if(nums[mid] < target) l = mid + 1;
+            else r = mid;
+        }
+        return nums[l] == target;
+    }
+
 
     // 26 同向指针
     public int removeDuplicates(int[] nums) {
@@ -923,6 +977,21 @@ public class Solution {
         }
         return res.toArray(new int[res.size()][]);
     }
+
+    // 986
+    public int[][] intervalIntersection(int[][] A, int[][] B) {
+        List<int[]> res = new ArrayList<>();
+        int idxA = 0, idxB = 0;
+        while(idxA < A.length && idxB < B.length){
+            int l = Math.max(A[idxA][0], B[idxB][0]);
+            int h = Math.min(A[idxA][1], B[idxB][1]);
+            if(l <= h) res.add(new int[]{l, h});
+            if(A[idxA][1] < B[idxB][1]) idxA ++;
+            else idxB ++;
+        }
+        return res.toArray(new int[res.size()][2]);
+    }
+
     // 438 滑窗
     public List<Integer> findAnagrams(String s, String p) { // 花花
         char[] arrS = s.toCharArray();
@@ -1046,6 +1115,31 @@ public class Solution {
         return maxArea;
     }
 
+    // 494
+    int ans494 = 0;
+    public int findTargetSumWays(int[] nums, int S) {
+
+        helper(nums, S, 0);
+        return ans494;
+    }
+    public void helper(int[] nums, int sum, int start){
+        if(start == nums.length) {
+            if (sum == 0) {
+                ans494 += 1;
+            }
+            return;
+        }else{
+//        for (int i = start; i < nums.length; i++) { // 每条路径必须从nums[0]开始
+            helper(nums, sum + nums[start], start + 1);
+            helper(nums, sum - nums[start], start + 1);
+//        }
+        }
+    }
+
+    // 351
+
+
+
     // 312 区间动归 546消消乐 和 加左右隔板84 最大矩形区间
     public int maxCoins(int[] nums) {
         int N = nums.length;
@@ -1141,7 +1235,59 @@ public class Solution {
         return sb.toString().equals(sb.reverse().toString());
     }
 
-    // 140
+    // 139 单词能拆解成字典 dp
+    public boolean wordBreak130(String s, List<String> wordDict) {
+        boolean[] dp = new boolean[s.length() + 1];
+        dp[0] = true;
+        for(int i = 1;i < s.length() + 1;i ++){
+            for(int j = i;j >= 0;j --) {
+                String word = s.substring(j, i);
+//                if(word.equals("code")){ // == 比较对象内存地址
+//                    System.out.println(j);
+//                    System.out.println(java.util.Arrays.toString(dp));
+//                }
+                if(wordDict.contains(word) && dp[j] == true){ // dp[j]:[0, j-1]在字典中能截取
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+//        System.out.println(wordDict.contains("code"));
+        return dp[s.length()];
+    }
+
+    // 140 解1：dp 这个解法比Trie代码量小很多
+    /*
+    有个超时的用例
+    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+["a","aa","aaa","aaaa","aaaaa","aaaaaa","aaaaaaa","aaaaaaaa","aaaaaaaaa","aaaaaaaaaa"]
+     */
+    public List<String> wordBreak(String s, List<String> wordDict) {
+        int N = s.length();
+
+        List<String>[] dp = new ArrayList[N + 1];
+//        System.out.println(dp[0]);
+//        List<String> initial = Arrays.asList(""); // 等号右边是abstractlist
+        List<String> initial = new ArrayList<>();
+        initial.add("");
+        dp[0] = initial; // 不能直接赋值
+        for (int i = 1; i <= N; i++) {
+            List<String> list = new ArrayList<>();
+            for (int j = 0; j < i; j++) {
+                String str = s.substring(j, i);
+                if(wordDict.contains(str) && dp[j].size() != 0){
+                    for(String strj : dp[j]){
+                        list.add(strj + (strj.equals("") ? str : " " + str));
+                    }
+                }
+                dp[i] = list;
+            }
+        }
+        System.out.println(Arrays.toString(dp));
+        return dp[N];
+    }
+
+    // 140 解2 ：深搜 O(n3)
     public List<String> wordBreak2(String s, List<String> wordDict) {
         Set<String> wordSet = new HashSet();
         for(String word: wordDict){
@@ -1199,6 +1345,8 @@ public class Solution {
             }
         }
     }
+
+    // 140 解3 Trie
 
     // 10
     public boolean matches(char[] sArr, char[] pArr, int i, int j){
@@ -1260,6 +1408,30 @@ public class Solution {
         }
         return dp[M][N];
     }
+
+    // 91
+    public int numDecodings(String s) {
+        // 对0 分类讨论
+        int[] dp = new int[s.length() + 1];
+        char[] sArr = s.toCharArray();
+        if(sArr[0] == '0') return 0; // s = "0" "01"
+        dp[0] = 1;
+        dp[1] = 1;
+        for(int i = 2;i <= s.length();i ++){
+            if(sArr[i] == '0'){
+                if(sArr[i - 1] == '1' || sArr[i - 1] == '2'){
+                    dp[i] = dp[i - 2];
+                }
+                else return 0;// 没有解码方式
+            }else{
+                if(sArr[i - 1] == '1' || (sArr[i - 1] == '2' && sArr[i] <= '6')) dp[i] = dp[i - 1] + dp[i - 2];
+
+            }
+            dp[i - 1] = dp[i - 2];
+        }
+        return dp[s.length()];
+    }
+
 
     // 93
     public List<String> restoreIpAddresses(String s) {
@@ -1387,6 +1559,7 @@ public class Solution {
 
     }
 
+
     public boolean isSubsequence(String s, String t) {
         int M = s.length(), N = t.length();
         boolean[][] dp = new boolean[M + 1][N + 1];
@@ -1432,11 +1605,53 @@ public class Solution {
         }
         return dp[l][r][k];
     }
+    // 221
+    public int maximalSquare(String[][] matrix) {
+        if(matrix.length == 0) return 0;
+        int M = matrix.length, N = matrix[0].length, res = 0;
+        int[][] dp = new int[M][N];
+        for(int i = 0;i < M;i ++){
+            for(int j = 0;j < N;j ++){
+                if(i == 0 || j == 0) dp[i][j] = matrix[i][j] == "1"? 1 : 0;
+                else if(matrix[i][j] == "1")
+                {
+                    dp[i][j] = Math.min(Math.min(dp[i - 1][j - 1],dp[i - 1][j]), dp[i][j - 1]) + 1;
+                }
+                res = Math.max(res, dp[i][j]);
+            }
+            System.out.println(Arrays.toString(dp[i]));
+
+        }
+        return res * res;
+    }
+    // 85
+    public int maximalRectangle(String[][] matrix) {
+        if(matrix.length == 0) return 0;
+        int M = matrix.length, N = matrix[0].length, area = 0;
+        int[][] dp = new int[M][N];
+        for(int i = 0;i < M;i ++){
+            for(int j = 0;j < N;j ++){
+                if(matrix[i][j] == "1"){
+                    dp[i][j] = j > 0 ? dp[i][j - 1] + 1 : 1;
+                    int width = N;
+                    for(int k = i;k >=0;k --) {
+                        if(matrix[k][j] == "0") break;
+                        width = Math.min(width, dp[k][j]);
+                        area = Math.max(area, width * (i - k + 1));
+//                        System.out.printf("%d,%d,%d,%d\n",i, j, k, area);
+                    }
+                }
+            }
+//            System.out.println(Arrays.toString(dp[i]));
+        }
+        return area;
+    }
+
 
     // 219
     public boolean containsNearbyDuplicate(int[] nums, int k) {
-        if(k == 0 || nums == null || nums.length ==0 || nums.length == 1) return false;
-        if(nums.length == 2) return nums[0]  == nums[1];
+//        if(k == 0 || nums == null || nums.length ==0 || nums.length == 1) return false;
+//        if(nums.length == 2) return nums[0]  == nums[1];
         int l = 0, r = 1;
         while(l <= nums.length - 2){
 //            if(l == 2) System.out.println(nums[4] == nums[2]);
@@ -1640,10 +1855,62 @@ public int hammingWeight(int n) {
     return bits;
 }
 
+// 260
+public int[] singleNumber(int[] nums) {
+    int N = nums.length, sum = 0;
+    for(int n: nums){
+        sum ^= n;
+    }
+
+    int diff = 1;
+    while((sum & 1) != 1){ // 运算符优先级
+        sum >>= 1;
+        diff <<= 1;
+    }
+
+    int a = 0, b = 0;
+    for(int n: nums){
+        if((n & diff) == 1){
+            a ^= n;
+        }else{
+            b ^= n;
+        }
+    }
+    return new int[]{a, b};
+}
+
+// 273
+public String numberToWords(int num) {
+    String[] list0 = {"", "Thousand", "Million", "Billion"};
+    String[] list1 = {"Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"
+            ,"Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"};
+    String[] list2 = {"Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"};
+    if(num == 0) return "Zero";
+    StringBuilder res = new StringBuilder();
+    int idx = 0;
+    while(num > 0){
+        if(num % 1000 != 0){
+            StringBuilder tmp = new StringBuilder();
+            three(num % 1000, tmp, list1, list2);
+            res.insert(0, tmp.append(list0[idx]).append(" "));
+        }
+
+        num /= 1000;
+        idx ++;
+    }
+    return res.toString().trim();
+}
+public void three(int num, StringBuilder tmp, String[] list1, String[] list2){
+        if(num == 0) return;
+    if(num < 20) tmp.append(list1[num]).append(" ");
+    else if(num < 100) three(num % 10, tmp.append(list2[num / 10 - 2]).append(" "), list1, list2);
+    else three(num % 100, tmp.append(list1[num / 100]).append(" Hundred").append(" "), list1, list2);
+}
+
 public int nextGreaterElement(int n) {
     char[] num = String.valueOf(n).toCharArray();
     int N = num.length;
-//    if(N == 1) return -1;N
+//    if(N == 1) return -1;
 //    if(N == 2){
 //        reverse(num, 0, 1);
 //    }
@@ -1688,39 +1955,64 @@ private void swap(char[] nums, int i, int j) {
         return sb.toString();
     }
     // 31
+//    public void nextPermutation(int[] nums) {
+//        int N = nums.length;
+//        if(N == 0 || N == 1) return;
+//
+//        int i = N - 1;
+//        while(i > 0 && nums[i - 1] >= nums[i]) i --;
+//        if(i >= 1){ // 不是最后一个排列
+//            int min = i;
+//
+//            for(int j = i; j < N;j ++){
+//                if(nums[j] <= nums[min] && nums[j] > nums[i - 1]){
+//                    min = j;
+//                }
+//            }
+//            System.out.println(i);
+//
+//            int tmp = nums[i - 1];
+//            nums[i - 1] = nums[min];
+//            nums[min] = tmp;
+//            System.out.println(Arrays.toString(nums));
+//        }
+//
+//
+//        int l = i, r = N - 1;
+//        System.out.println(l);
+//        System.out.println(r);
+//        while(l < r){
+//            int tmp = nums[r];
+//            nums[r] = nums[l];
+//            nums[l] = tmp;
+//            l ++;
+//            r --;
+//        }
+//        return;
+//    }
     public void nextPermutation(int[] nums) {
         int N = nums.length;
         if(N == 0 || N == 1) return;
-
         int i = N - 1;
-        while(i > 0 && nums[i - 1] >= nums[i]) i --;
-        if(i >= 1){ // 不是最后一个排列
-            int min = i;
-
-            for(int j = i; j < N;j ++){
-                if(nums[j] <= nums[min] && nums[j] > nums[i - 1]){
-                    min = j;
-                }
+        while(i > 0 && nums[i] <= nums[i - 1]) i --;
+        System.out.println(i);
+        if(i == 0) {
+            int l = 0, r = N - 1;
+            while(l < r){
+                swap31(nums, l ++, r --);
             }
-            System.out.println(i);
 
-            int tmp = nums[i - 1];
-            nums[i - 1] = nums[min];
-            nums[min] = tmp;
-            System.out.println(Arrays.toString(nums));
+        }else{
+            int k = N - 1;
+            while(nums[k] <= nums[i]) k --;
+            swap31(nums, i, k);
         }
 
-
-        int l = i, r = N - 1;
-        System.out.println(l);
-        System.out.println(r);
-        while(l < r){
-            int tmp = nums[r];
-            nums[r] = nums[l];
-            nums[l] = tmp;
-            l ++;
-            r --;
-        }
+    }
+    public void swap31(int[] nums, int i, int j){
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
         return;
     }
 
@@ -1750,29 +2042,45 @@ private void swap(char[] nums, int i, int j) {
     }
 
     // jian 64
+//    public int[] maxSlidingWindow(int[] nums, int k) {
+//        if(nums == null || nums.length == 0) return nums;
+//        Deque<Integer> index = new LinkedList<>();
+//
+//        for(int i = 0;i < k - 1;i ++){
+//            while(index.size() > 0 && nums[index.getLast()] < nums[i]) index.removeLast();
+//            index.addLast(i);
+//        }
+//        int N = nums.length;
+//        int[] res = new int[N - k + 1];
+//        for(int i = k - 1;i < N;i ++){
+//            System.out.println(Arrays.toString(index.toArray()));
+//            while(index.size() > 0 && nums[index.getLast()] < nums[i]){
+//                index.removeLast();
+//            }
+//            System.out.println(Arrays.toString(index.toArray()));
+//            index.addLast(i);
+//            System.out.println(Arrays.toString(index.toArray()));
+//            // if(index.size() > 0)
+//            res[i - k + 1] = nums[index.getFirst()]; // 队首为最大元素
+//            // else res[i - k + 1] = nums[i];
+//
+//            if(index.getFirst() == i - k + 1) index.removeFirst();
+//        }
+//        return res;
+//    }
+    // 239
     public int[] maxSlidingWindow(int[] nums, int k) {
-        if(nums == null || nums.length == 0) return nums;
-        Deque<Integer> index = new LinkedList<>();
+        Deque<Integer> window = new ArrayDeque<>();
+        int[] res = new int[nums.length - k + 1];
+        System.out.println(res.length);
+        for(int i = 0;i < nums.length;i ++){
+            while(!window.isEmpty() && nums[window.getLast()] < nums[i]) window.removeLast();
+            window.addLast(i);
 
-        for(int i = 0;i < k - 1;i ++){
-            while(index.size() > 0 && nums[index.getLast()] < nums[i]) index.removeLast();
-            index.addLast(i);
-        }
-        int N = nums.length;
-        int[] res = new int[N - k + 1];
-        for(int i = k - 1;i < N;i ++){
-            System.out.println(Arrays.toString(index.toArray()));
-            while(index.size() > 0 && nums[index.getLast()] < nums[i]){
-                index.removeLast();
-            }
-            System.out.println(Arrays.toString(index.toArray()));
-            index.addLast(i);
-            System.out.println(Arrays.toString(index.toArray()));
-            // if(index.size() > 0)
-            res[i - k + 1] = nums[index.getFirst()]; // 队首尾最大元素
-            // else res[i - k + 1] = nums[i];
-
-            if(index.getFirst() == i - k + 1) index.removeFirst();
+            if(window.getFirst() == i - k) window.removeFirst();
+            System.out.println(window.toString());
+            // if(!window.isEmpty() && window.peek() == nums[i - 1]) window.pop();
+            if(i >= k - 1) res[i - k + 1] = nums[window.getLast()];
         }
         return res;
     }
@@ -1922,6 +2230,388 @@ private void swap(char[] nums, int i, int j) {
         else return a / b;
     }
 
+    // 912 求逆序对
+    // 1. merge sort 归并排序
+    public int sortArray(int[] nums) {
+        return merge(nums, 0, nums.length - 1);
+    }
+    public int merge(int[] nums, int left, int right){
+        if(left >= right) return 0;
+        int mid = left + (right - left) / 2;
+
+        int l = merge(nums, left, mid);
+        int r = merge(nums, mid + 1, right); // 含左含右
+        return l + r + mergeSorted(nums, left, right, mid);
+    }
+
+    public int mergeSorted(int[] nums, int left, int right, int mid){
+        // 先把值复制到临时数组，再合并回去
+        System.out.printf("left: %d, right: %d\n", left, right);
+        int count = 0;
+        int[] tmp = new int[right - left + 1];
+        int i = left, j = mid + 1;
+        for(int k = 0; k < right - left + 1;k ++){
+            if(i == mid + 1){
+                tmp[k] = nums[j ++];
+            }else if(j == right + 1){
+                tmp[k] = nums[i ++];
+            }else if(nums[i] <= nums[j]){
+                tmp[k] = nums[i ++];
+            }else{
+                tmp[k] = nums[j ++];
+                System.out.printf("mid: %d , i: %d\n", mid, i);
+                count += mid - i + 1;
+            }
+        }
+        for(int k = 0; k < right - left + 1;k ++){
+            nums[left + k] = tmp[k];
+        }
+        return count;
+    }
+
+    // TODO: 493
+    public int reversePairs(int[] nums){
+        return merge493(nums, 0, nums.length - 1);
+    }
+    public int merge493(int[] nums, int left, int right){
+        if(left >= right) return 0;
+        int mid = left + (right - left) / 2;
+        int l = merge493(nums, left, mid);
+        int r = merge493(nums, mid + 1, right);
+
+        return l + r + mergeSorted493(nums, left, right);
+    }
+    public int mergeSorted493(int[] nums, int left, int right){
+        int mid = left + (right - left) / 2;
+        int[] tmp = new int[right - left + 1];
+        int j = mid + 1;
+        int cnt = 0;
+        // 归并前暴力求翻转对
+//        System.out.println(Arrays.toString(nums));
+        for (int i = left; i <= mid ; i++) {
+            while(j <= right && nums[i] > 2 * nums[j ++]) {
+                System.out.println("true");
+                System.out.printf("%d, %d\n", i, j);
+                cnt += j - i ;
+            }
+        }
+        System.out.println(Arrays.toString(nums));
+
+        // 归并
+        int i = left;
+        j = mid + 1;
+        for(int k = 0; k <= right - left;k ++){
+//            System.out.printf("%d, %d,%d, %d, %b,%b, %d\n", left, right, j, i,j > right,i > mid, k);
+            if(i > mid) {
+                tmp[k] = nums[j ++];
+            }
+            else if(j > right) tmp[k] = nums[i ++];
+            else if(nums[i] <= nums[j]){
+                tmp[k] = nums[i ++];
+            }else{
+                tmp[k] = nums[j ++];
+            }
+        }
+        for (int k = 0; k <= right - left; k++) {
+            nums[k + left] = tmp[k];
+        }
+        return cnt;
+    }
+
+        // 315
+//    public List<Integer> countSmaller(int[] nums) {
+//        List<Integer> res = new ArrayList<>();
+//        int N = nums.length;
+//        if(N == 0) return res;
+//
+//        int tmp = new int[N];
+//        int[] res = new int[N];
+//
+//        mergeAndCount(nums, left, right, tmp);
+//    }
+//    public void mergeAndCount(int[] nums, int left, int right, int tmp){
+//        if(left == right) return;
+//        int mid = left + (left + right) / 2;
+//        mergeAndCount(nums, left, mid, tmp);
+//        mergeAndCount(nums, mid + 1, right, tmp);
+//
+//        for(int k = left;k <= right;k ++){
+//            if(i > mid){
+//                tmp[j];
+//            }
+//        }
+//    }
+        public List<Integer> countSmallerInsersionSort(int[] nums) {
+            List<Integer> res = new ArrayList<>();
+            int N = nums.length;
+            for (int i = N - 1; i >= 0 ; i--) {
+                int j = i + 1, tmp = nums[i];
+                while(j < N && nums[j] >= tmp){
+
+                }
+            }
+            return res;
+        }
+
+    public List<Integer> countSmallerBinarySearchTree(int[] nums) {
+        List<Integer> res = new ArrayList<>();
+        return res;
+    }
+    public List<Integer> countSmaller(int[] nums) {
+        List<Integer> res = new ArrayList<>();
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for (int i = 0; i < nums.length; i++) {
+            pq.add(nums[i]);
+        }
+
+        Map<Integer, Integer> map = new HashMap<>();
+        int rank = 1;
+        while(!pq.isEmpty()){
+            map.put(pq.poll(), rank);
+            rank ++;
+        }
+
+        Fenwick tree = new Fenwick(nums);
+        for (int i = nums.length - 1; i >= 0; i --) {
+            rank = map.get(nums[i]);
+            tree.update(rank ,1);
+            res.add(tree.query(rank - 1));
+        }
+        Collections.reverse(res);
+
+        return res;
+    }
+
+    // √ 327
+    int[] sum;
+    public int countRangeSum327(int[] nums, int lower, int higher){
+        sum = new int[nums.length];
+        sum[0] = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            sum[i] = sum[i - 1] + nums[i];
+        }
+        return countNum(nums, 0, nums.length - 1, lower, higher);
+    }
+    private int countNum(int[] nums, int left, int right, int lower, int higher){
+        if(left == right){
+            if(nums[left] >= lower && nums[right] <= higher) return 1;
+            return 0;
+        }
+        int mid = left + (right - left) / 2;
+        int total = 0;
+        for (int i = left; i <= mid; i++) {
+            for (int j = mid + 1; j <= right; j++) {
+                int tmp = sum[j] - sum[i] + nums[i];
+                if(tmp >= lower && tmp <= higher) total ++;
+            }
+        }
+        return total + countNum(nums, left, mid, lower, higher) + countNum(nums, mid + 1, right, lower, higher);
+    }
+    // 327 写法2
+    public int mergeCnt327(int[] sum, int left, int right, int lower, int upper){
+        if(left >= right) return 0;
+        int mid = left + (right - left) / 2;
+
+        int cnt = 0;
+        int i = left, j = mid + 1;
+        for (int k = 0; k < right - left + 1; k++) {
+            while(i <= mid && sum[i] - sum[k] < lower) i ++;
+            while(j <= right && sum[j] - sum[k] <= upper) j ++;
+            cnt += 1;
+        }
+
+        return cnt + mergeCnt327(sum, left, mid, lower, upper) + mergeCnt327(sum, mid + 1, right, lower, upper) ;
+    }
+
+    public int countRangeSum(int[] nums, int lower, int upper) {
+        int N = nums.length;
+        int[] sum = new int[N];
+        sum[0] = nums[0];
+        for (int i = 1; i < N; i++) {
+            sum[i] = sum[i - 1] + nums[i];
+        }
+        return mergeCnt327(sum, 0, nums.length - 1, lower, upper);
+    }
+
+    // TODO: 327 BIT 解 + 离散化 + 前缀和
+    public int countRangeSum2(int[] nums, int lower, int upper) {
+        int total = 0;
+
+        PriorityQueue<Long> pq = new PriorityQueue<>();
+//       或者用 TreeSet<Long> ts = new TreeSet<>();
+        long[] prefix = new long[nums.length + 1];
+        for (int i = 1; i <= nums.length; i++) {
+            prefix[i] = prefix[i - 1] + nums[i - 1];
+            pq.add(prefix[i]);
+            System.out.printf("prefix: %d\n", prefix[i]);
+            pq.add(prefix[i] - lower);
+            System.out.printf("added: %d\n", prefix[i] - lower);
+            System.out.printf("added: %d\n", prefix[i] - upper);
+            pq.add(prefix[i] - upper);
+        }
+
+        Map<Long, Integer> map = new HashMap<>();
+        int rank = 1;
+        while(!pq.isEmpty()){
+            long key = pq.poll();
+            System.out.printf("key: %d\n", key);
+            map.put(key, rank);
+            rank ++;
+        }
+
+        Fenwick tree = new Fenwick(nums);
+        System.out.println(Arrays.toString(prefix));
+        for (int i = 1; i <= nums.length; i++) {
+            long val = prefix[i];
+            System.out.println(val - lower);
+            System.out.println(val - upper);
+            int high_rank = map.get(val - lower);
+            int low_rank = map.get(val - upper);
+            rank = map.get(val);
+
+            total += tree.query(high_rank) - tree.query(low_rank);
+            tree.update(rank ,1);
+        }
+
+        return total;
+    }
+
+    // 64
+    public int maximumGap(int[] nums) {
+        int N = nums.length;
+        if (N < 2) return 0; // 用例[10]
+        int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
+        for(int i = 0;i < N;i ++){
+            min = Math.min(min, nums[i]);
+            max = Math.max(max, nums[i]);
+        }
+        int size = Math.max((max - min) / N, 1); // 防止size为0
+
+        Bucket[] bucket = new Bucket[max - min];
+
+        for(int i = 0;i < N;i ++){
+            int no = (nums[i] - min) / size;
+//            System.out.println(no);
+//            System.out.println(bucket[no]);
+            if (bucket[no] == null) bucket[no] = new Bucket();// 对象数组初始化，防止空指针异常
+            bucket[no].min = Math.min(bucket[no].min, nums[i]);
+            bucket[no].max = Math.max(bucket[no].max, nums[i]);
+        }
+
+        int prevMax = -1;
+        int maxGap = Integer.MIN_VALUE;
+        for(int i = 0;i < bucket.length;i ++){
+            if(bucket[i] != null && prevMax != -1){ // 空指针异常
+                maxGap = Math.max(maxGap, bucket[i].min - prevMax);
+            }
+            if(bucket[i] != null) prevMax = bucket[i].max;
+        }
+        return maxGap;
+
+    }
+    class Bucket{
+        int max;
+        int min;
+        public Bucket(){
+            this.max = Integer.MIN_VALUE;
+            this.min = Integer.MAX_VALUE;
+        }
+    }
+
+    // 49
+    public String encode(String a){
+        StringBuilder sb = new StringBuilder();
+        int[] arr = new int[26];
+        for(int i = 0;i < a.length();i ++){
+            int idx = a.charAt(i) - 'a';
+            arr[idx] ++;
+        }
+        for(int i = 0;i < 26;i ++){
+            sb.append(arr[i]);
+            sb.append('#');
+        }
+        return sb.toString();
+    }
+    public List<List<String>> groupAnagrams(String[] strs) {
+        List<String> res = new ArrayList<>();
+        Map<String, List<String>> map = new HashMap<>();
+        for(String str: strs){
+            String encoded = encode(str);
+            List<String> l = map.getOrDefault(encoded, new ArrayList());
+            l.add(str);
+            map.put(encoded, l);
+        }
+        return new ArrayList(map.values()); // Collection<List<String>> -> ArrayList<List<String>>
+    }
+
+    // 324 O(n)时间 O(1)空间
+    // 找中位数 方法类似快排
+    // TODO
+    int getMid(int[] nums, int l, int r, int rank){
+        int cur = nums[l];
+        int left = l, right = r;
+        while(left < right){
+            while(left < right && nums[right] >= cur) right--;
+            nums[left] = nums[right];
+            while(left < right && nums[left] <= cur) left ++;
+            nums[right] = nums[left];
+        }
+        nums[left] = cur;
+        if(left - l == rank) return cur;
+        else if(left - l < rank) return getMid(nums, left + 1, r, rank - (left - l) + 1);
+        return -1;
+    }
+
+
+    // 983
+    public int mincostTickets(int[] days, int[] costs) {
+        int N = days[days.length - 1];
+        int[] dp = new int[N + 1];
+        Set<Integer> daySet = new HashSet();
+        for(int d : days){
+            daySet.add(d);
+        }
+
+        for (int i = 1; i <= N ; i ++) {
+            if(daySet.contains(i)){
+                dp[i] = Math.min(Math.min(
+                        dp[Math.max(0, i - 1)] + costs[0],
+                        dp[Math.max(0, i - 7)] + costs[1]),
+                        dp[Math.max(0, i - 30)] + costs[2]);
+            }else{
+                dp[i] = dp[i - 1];
+            }
+        }
+//        System.out.println(Arrays.toString(dp));
+        return dp[N];
+    }
+
+        // 629
+    public int kInversePairs(int n, int k) {
+        int M = 100000007;
+        int[][] dp = new int[n + 1][k + 1];
+        dp[0][0] = 1;
+        for(int i = 1;i <= n;i ++){
+            dp[i][0] = 1;
+            for(int j = 1;j <= k && j <= i * (i - 1) / 2;j ++){
+                dp[i][j] = (dp[i][j - 1] + dp[i - 1][j] - dp[i - 1][j - 1]) % M;
+            }
+        }
+        for(int i = 0;i <= n;i ++){
+            System.out.println(Arrays.toString(dp[i]));
+        }
+        return dp[n][k];
+    }
+
+    // 775
+    public boolean isIdealPermutation(int[] A) {
+        int floor = A.length;
+        for (int i = A.length - 1; i >= 2 ; i --) {
+            floor = Math.min(floor, A[i]);
+            if(A[i - 2] > floor) return false;
+        }
+        return true;
+    }
 
 
     // TODO: 969
@@ -1996,6 +2686,158 @@ private void swap(char[] nums, int i, int j) {
         res = res * flag;
         return res;
     }
+
+
+    // 149
+    public int maxPoints(int[][] points) {
+        if(points.length < 3) return points.length;
+        int max = 0, res = 0, duplicate = 0;
+
+        for(int i = 0;i < points.length;i ++){
+            Map<String, Integer> map = new HashMap<>();
+            duplicate = 0;
+            for(int j = i + 1;j < points.length;j ++){
+
+                int dx = points[j][0] - points[i][0];
+                int dy = points[j][1] - points[i][1];
+                if(dx == 0 && dy == 0) {
+//                    System.out.printf("%d, %d, %d\n", j, points[j][0], points[j][1]);
+                    duplicate ++;
+                    continue;
+                }
+                int gcd = gcd(dx, dy);
+                int y = dy / gcd;
+                int x = dx / gcd;
+                String k = x + "#" + y;
+                map.put(k, map.getOrDefault(k, 0) + 1);
+            }
+            if(map.size() > 0) max = Collections.max(map.values());
+//            System.out.println(duplicate);
+            res = Math.max(res, max + duplicate + 1); // 1 当前考虑的点 duplicate重合的点
+        }
+        return res;
+    }
+
+    int gcd(int a, int b){
+        while ((b != 0)){
+            int tmp = b;
+            b = a % b;
+            a = tmp;
+        }
+        return a;
+    }
+
+    public int maxProduct(int[] nums) {
+        int mini = 1;
+        int maxi = 1;
+        int maxVal = Integer.MIN_VALUE;
+        for(int i = 0;i < nums.length;i ++){
+            if(nums[i] < 0){
+                int tmp = mini; mini = maxi; maxi = tmp;
+            }
+            maxi = Math.max(nums[i], maxi * nums[i]);
+            mini = Math.min(nums[i], mini * nums[i]);
+
+            maxVal = Math.max(maxVal, maxi);
+//            System.out.printf("%d, %d, %d, %d\n", nums[i], mini, maxi, maxVal);
+        }
+        return maxVal;
+    }
+
+    // 401
+    public List<String> readBinaryWatch(int num) {
+        List<String> res = new ArrayList<>();
+        dfs(num, 0, 0, 0, res);
+        return res;
+    }
+    public void dfs(int num, int start, int hour, int min, List<String> res){
+        if(start == 11 || hour > 11 || min > 59) return;
+
+        // if(num > 10 - start) return; // 亮灯数大于剩下的位置数
+        if(num == 0){
+            System.out.println(start);
+            if(start == 9) System.out.println(min);
+            String minStr = String.valueOf(min);
+            if(min < 10) minStr = "0" + minStr;
+            res.add(String.valueOf(hour) + ":" + minStr);
+            return;
+        }
+        // 不选当前位置
+        dfs(num, start + 1, hour, min, res);
+        // 选当前位置
+        if(start < 4) hour += 1 << start;
+        else min += 1 << (start - 4);
+        dfs(num - 1, start + 1, hour, min, res);
+    }
+
+    // 17
+    Map<Integer, char[]> map17;
+    public List<String> letterCombinations(String digits) {
+        map17 = new HashMap<>(); // ！！map赋初值的方式
+        map17.put(2, new char[]{'a','b','c'});
+        map17.put(3, new char[]{'d','e','f'});
+        map17.put(4, new char[]{'g','h','i'});
+        map17.put(5, new char[]{'j','k','l'});
+        map17.put(6, new char[]{'m','n','o'});
+        map17.put(7, new char[]{'p','q','r','s'});
+        map17.put(8, new char[]{'t','u','v'});
+        map17.put(9, new char[]{'w','x','y','z'});
+
+        List<String> res = new ArrayList<>();
+        if(digits.length() == 0) return res; // 用例 ""
+        dfs(digits, 0, new StringBuilder(), res);
+        return res;
+    }
+    public void dfs(String digits, int start, StringBuilder path, List<String> res){
+        if(start == digits.length()){
+            res.add(path.toString()); // stringBuilder没有传引用的问题
+            return;
+        }
+        char[] choices = map17.get(digits.charAt(start) - '0');
+        for(int i = 0;i < choices.length;i ++){
+            path.append(choices[i]);
+            dfs(digits, start + 1, path, res);
+            path.deleteCharAt(path.length() - 1);
+        }
+    }
+
+    // 190 TODO: long n to String s 是78519472704。明明没有超过Long的界
+    public int reverseBits(long n) {
+        String s = "" + n;
+        System.out.println(s);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 8 ; i++) {
+            sb.append(s.charAt(s.length() - i - 1));
+        }
+        for (int i = 8; i < 16; i++) {
+            sb.append(s.charAt(i - 8));
+        }
+        System.out.println(sb.toString());
+        return Integer.parseInt(sb.toString());
+    }
+
+    public int countPrimeSetBits(int L, int R) {
+        int cnt = 0;
+        for(int i = L;i <= R;i ++){
+            int ones = Integer.bitCount(i);
+            if(isPrime(ones)){
+                cnt ++;
+            }
+        }
+        return cnt;
+    }
+    public boolean isPrime(int n){
+        if(n == 1) return false; // 1不是质数
+        for(int i = 2;i <= Math.sqrt(n);i++){ // 注意等于号
+            if(n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // 70, 198 滚动数组代替dp[], 减少异常处理情况： nums.length == 0 或1
+
 
 
     public static void main(String[] args) {
@@ -2086,7 +2928,7 @@ private void swap(char[] nums, int i, int j) {
 //        System.out.println(s.subsetsWithDup(nums));
 //        int[] nums = {1, 1, 2};
 //        System.out.println(s.permuteUnique(nums));
-        System.out.println(s.getPermutation(3, 1));
+//        System.out.println(s.getPermutation(3, 1));
 //        System.out.println(s.getPermutation(3, 2));
 //        System.out.println(s.getPermutation(3, 3));
 //        System.out.println(s.getPermutation(4, 2));
@@ -2139,14 +2981,16 @@ private void swap(char[] nums, int i, int j) {
 //        System.out.println(s.restoreIpAddresses("111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"));
 
 //        int[] nums = {3, 2, 1};
+//        int[] nums = {1, 2, 3};
 //        int[] nums = {5, 1, 1};
 //        int[] nums = {2,3,1,3,3};
-//        int[] nums = {1, 2};
-//        s.nextPermutation(nums);
-//        System.out.println(Arrays.toString(nums));
+        int[] nums = {1, 2};
+        s.nextPermutation(nums);
+        System.out.println(Arrays.toString(nums));
 //        System.out.println(s.isNumber("-1e."));
 //        System.out.println(Arrays.toString(s.twoSum(2)));
-//        int[] nums = {1, -1};
+//        int[] nums2 = {1, -1};
+//        System.out.println(Arrays.toString(s.maxSlidingWindow(nums2,1)));
 //        int[] nums = {1,3,-1,-3,5,3,6,7};
 //        System.out.println(Arrays.toString(s.maxSlidingWindow(nums,3)));
 
@@ -2212,5 +3056,94 @@ private void swap(char[] nums, int i, int j) {
 //        String[] words = {"foo","bar"};
 //        System.out.println(s.findSubstring("barfoothefoobarman", words));
 
+        // 91
+//        System.out.println(s.numDecodings("1212"));
+//        System.out.println(s.numDecodings("110"));
+
+//        int[] nums = {7,5,6,4};
+//        System.out.println(s.sortArray(nums));
+
+//        System.out.println(s.kInversePairs(3, 1));
+//        int[] nums = {1, 1, 1, 1, 1};
+//        System.out.println(s.findTargetSumWays(nums, 3));
+//
+//        int[] A = {1, 0, 2};
+//        System.out.println(s.isIdealPermutation(A));
+
+//        int[] nums = {-2, 5, -1};
+//        System.out.println(s.countRangeSum2(nums, -2, 2));
+
+//        int[] days = {1,4,6,7,8,20};
+//        int[] costs = {2,7,15};
+//        System.out.println(s.mincostTickets(days, costs));
+
+//        int[][] A = {{0,2},{5,10},{13,23},{24,25}};
+//        int[][] B = {{1,5},{8,12},{15,24},{25,26}};
+//        System.out.println(Arrays.toString(s.intervalIntersection(A, B)));
+
+//        int[] nums = {5,2,6,1};
+//        System.out.println(s.countSmaller(nums).stream().map(Object::toString).collect(Collectors.joining(",")));
+
+//        int[] nums = {3,6,9,1};
+//        System.out.println(s.maximumGap(nums));
+
+//        int[] nums = {1, 5, 1, 1, 6, 4};
+//        System.out.println(s.getMid(nums, 0, nums.length - 1, nums.length /
+
+//        int[][] points = {{0, 0},{1, 1},{0, 0}};
+//        int[][] points = {{0, 0},{0, 0},{0, 0}};
+//        System.out.println(s.maxPoints(points));
+
+//        int[] nums = {2, 3, -2, 4};
+//        int[] nums = {-2, 0, -1};
+//        System.out.println(s.maxProduct(nums));
+
+//        int[] nums = {1,3,2,3,1};
+//        int[] nums = {2,4,3,5,1};
+//        System.out.println(s.reversePairs(nums));
+
+//        System.out.println(s.readBinaryWatch(1));
+
+//        System.out.println(s.letterCombinations("23"));
+
+//        System.out.println(s.reverseBits(0001111010011100L));
+//        System.out.println(s.countPrimeSetBits(6, 10));
+
+//        String[][] matrix = {{"1","0","1","0","0"},{"1","0","1","1","1"},{"1","1","1","1","1"},{"1","0","0","1","0"}};
+//        String[][] matrix = {};
+//        String[][] matrix = {{"1","0","1","0"},{"1","0","1","1"},{"1","0","1","1"},{"1","1","1","1"}};
+//        String[][] matrix = {{"1","0","1","1","1"},{"0","1","0","1","0"},{"1","1","0","1","1"},{"1","1","0","1","1"},{"0","1","1","1","1"}};
+//        System.out.println(s.maximalSquare(matrix));
+//        System.out.println(s.maximalRectangle(matrix));
+
+//        int[][] matrix = {{1,4,7,11,15},{2,5,8,12,19},{3,6,9,16,22},{10,13,14,17,24},{18,21,23,26,30}};
+//
+//        System.out.println(s.searchMatrix(matrix, 5));
+
+//        System.out.println(s.numberToWords(1234567));
+//        int[] nums = {1,3,2,3,4};
+//        System.out.println(s.findDuplicate(nums));
+    }
+}
+class Fenwick{
+    int[] sums;
+
+    public Fenwick(int[] nums){
+        this.sums = new int[nums.length + 1];
+    }
+    public void update(int idx, int delta){
+        while(idx < sums.length){
+            sums[idx] += delta;
+            idx += idx & -idx;
+//            System.out.printf("%d, %d\n", delta, idx);
+        }
+    }
+    public int query(int idx){
+        int sum = 0;
+        while(idx > 0){
+            sum += sums[idx];
+            idx -= idx & -idx;
+        }
+        return sum;
     }
 }

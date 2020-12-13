@@ -93,6 +93,47 @@ public class Solution_Tree {
         else return root;
     }
 
+    // 98
+    public boolean isValidBST(TreeNode root) {
+        if (root == null) return true;
+        return valid(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+    public boolean valid(TreeNode root, long low, long high) {
+        System.out.println(low);
+        System.out.println(high);
+        if (root == null) return true;
+        if (root.val <= low || root.val >= high) return false;
+        return valid(root.left, low, root.val) && valid(root.right, root.val, high);
+    }
+    // 必须要小于左子树的最小值
+//    public boolean isValidBST(TreeNode root) {
+//        if(root == null) return true;
+//        if(root.left == null && root.right == null) return true;
+//
+//        if(root.left != null && root.left.val >= root.val || root.right != null && root.val >= root.right.val) return false;
+//        return isValidBST(root.left) && isValidBST(root.right);
+//    }
+
+    // 687
+    int ans687 ;
+    public int longestUnivaluePath(TreeNode root) {
+
+        ans687 = 0;
+        dfs687(root);
+        return ans687;
+    }
+    public int dfs687(TreeNode root){
+        if(root == null) return 0;
+
+        int left = dfs687(root.left);
+        int right = dfs687(root.right);
+        int leftAns = 0, rightAns = 0;
+        if(root.left != null && root.left.val == root.val) leftAns += left + 1;
+        if(root.right != null && root.right.val == root.val) rightAns += right + 1;
+        ans687 = Math.max(ans687, leftAns + rightAns);
+        return Math.max(leftAns, rightAns);
+    }
+
     // 95
     public List<TreeNode> generateTrees(int n) {
         if(n == 0){
@@ -120,6 +161,63 @@ public class Solution_Tree {
             }
         }
         return res;
+    }
+
+    // 230
+//    int ans = 0;
+//    int cnt = 0;
+//    public int kthSmallest(TreeNode root, int k) {
+//        inorder(root, k);
+//        return ans;
+//    }
+//    public void inorder(TreeNode node, int k){
+//        if(node == null) return;
+//        inorder(node.left, k);
+//        cnt ++;
+////        System.out.println(cnt);
+//        if(cnt == k) ans = node.val;
+//        inorder(node.right, k);
+//    }
+    public int kthSmallest(TreeNode root, int k) {
+        Deque<TreeNode> stack = new ArrayDeque<>();
+//        stack.push(root);
+        while(!stack.isEmpty() || root != null){
+            stack.push(root);
+
+            while(root != null){
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+//            System.out.println(node.val);
+            k --;
+            if(k == 0) return root.val;
+            root = root.right;
+        }
+        return -1;
+    }
+
+
+        // 508
+    Map<Integer, Integer> map;
+    public int[] findFrequentTreeSum(TreeNode root) {
+        map = new HashMap<>();
+        sum(root);
+        int max = Collections.max(map.values());
+//         System.out.println(max);
+        List<Integer> res = new ArrayList<>();
+        for(int k :map.keySet()){
+            if(map.get(k) == max) res.add(k);
+        }
+        return res.stream().mapToInt(i->i).toArray();
+    }
+    public int sum(TreeNode node){
+        if(node == null) return 0;
+        int left = sum(node.left), right = sum(node.right);
+        int sum = node.val + left + right;
+//        System.out.println(sum);
+        map.put(sum, map.getOrDefault(sum, 0) + 1);
+        return sum;
     }
 
     // 1443 edge[from, to]，len(edge)=n-1的情况；错用例 edges = [[0,2],[0,3],[1,2]]
@@ -529,6 +627,63 @@ public class Solution_Tree {
         return 1 + Math.max(left, right);
     }
 
+    //426
+//    Node first = null;
+//    Node last = null;
+//    public Node treeToDoublyList(Node root) {
+//
+//        dfs426(root);
+//
+//        first.left = last;
+//        last.right = first;
+//        return first;
+//    }
+//    public void dfs426(Node root){
+//        if(root == null){
+//            return;
+//        }
+//        dfs426(root.left);
+//        if(last != null){
+//            root.left = last;
+//            last.right = root;
+//        }else{
+//            first = root;
+//        }
+//        last = root;
+//        dfs426(root.right);
+//    }
+
+    // 周赛209 #2
+
+    public boolean isEvenOddTree(TreeNode root) {
+        Queue<TreeNode> q = new ArrayDeque<>();
+        q.add(root);
+        int level = 0;
+        while(!q.isEmpty()){
+            int len = q.size();
+            level ++;
+            int last_odd = Integer.MIN_VALUE;
+            int last_even = Integer.MAX_VALUE;
+            for (int i = 0; i < len; i++) {
+                TreeNode node = q.poll();
+                if(node == null) return true;
+                int val = node.val;
+
+                if(node.left != null) q.add(node.left); // 防止空指针异常
+                if(node.right != null) q.add(node.right);
+
+                if(level % 2 == 1){
+                    if(last_odd >= val || val % 2 == 0) return false;
+                    last_odd = val;
+                }else{
+                    if(last_even <= val || val % 2 == 1) return false;
+                    last_even = val;
+                }
+            }
+        }
+        return true;
+    }
+
 
 
     public static void main(String[] args) {
@@ -583,9 +738,28 @@ public class Solution_Tree {
 //        TreeNode r2 = st.stringToTreeNode("[2,1,3,null,4,null,7]");
 //        System.out.println(st.treeNodeToString(st.mergeTrees(r1, r2)));
 
-        TreeNode root = st.stringToTreeNode("[1,2,2,3,null,null,3,4,null,null,4]");
-        System.out.println(st.isBalanced(root));
+//        TreeNode root = st.stringToTreeNode("[1,2,2,3,null,null,3,4,null,null,4]");
+//        System.out.println(st.isBalanced(root));
 
+//        TreeNode root = st.stringToTreeNode("[5,9,1,3,5,7]");
+//        TreeNode root = st.stringToTreeNode("[1]");
+//        TreeNode root = st.stringToTreeNode("[11,8,6,1,3,9,11,30,20,18,16,12,10,4,2,17]");
+//        System.out.println(st.isEvenOddTree(root));
+
+//        TreeNode root = st.stringToTreeNode("[1,4,5,4,4,5]");
+//        System.out.println(st.longestUnivaluePath(root));
+
+//        TreeNode root = st.stringToTreeNode("[5,2,-5]");
+//        System.out.println(Arrays.toString(st.findFrequentTreeSum(root)));
+
+
+//        TreeNode root = st.stringToTreeNode("[2,1,3]");
+//        TreeNode root = st.stringToTreeNode("[1,1]");
+//        TreeNode root = st.stringToTreeNode("[10,5,15,null,null,6,20]");
+//        System.out.println(st.isValidBST(root));
+
+        TreeNode root = st.stringToTreeNode("[3,1,4,null,2]");
+        System.out.println(st.kthSmallest(root, 1));
 
     }
 }

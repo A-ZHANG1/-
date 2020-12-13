@@ -5,6 +5,106 @@ import java.util.LinkedList;
  * Created by Wayne.A.Z on 2020-07-26.
  */
 public class Solution_graph {
+    public boolean canFinish(int numCourses, int[][] prerequisites){
+        List<List<Integer>> adjList = new ArrayList<>();// 转换为图的邻接链表表示
+        for (int i = 0; i < numCourses; i++) {
+            adjList.add(new ArrayList<>());
+        }
+        for (int i = 0; i < prerequisites.length; i++) {
+            adjList.get(prerequisites[i][1]).add(prerequisites[i][0]);
+        }
+        int[] visited = new int[numCourses];
+        for (int i = 0; i < numCourses; i++) {
+            if(!dfs207(adjList, visited, i)) return false;
+        }
+        return true;
+    }
+    public boolean dfs207(List<List<Integer>> adjList, int[] visited, int idx){
+        if(visited[idx] == 1) return false;
+        visited[idx] = 1;
+        for (int i = 0; i < adjList.get(idx).size(); i++) {
+            if(!dfs207(adjList, visited, adjList.get(idx).get(i))) return false;
+        }
+        visited[idx] = 0;
+        return true;
+    }
+    // bfs 拓扑排序
+    public boolean canFinishbfs(int numCourses, int[][] prerequisites){
+        List<List<Integer>> adjList = new ArrayList<>();
+        for (int i = 0; i < numCourses; i++) {
+            adjList.add(new ArrayList<>());
+        }
+        int[] indegrees = new int[numCourses]; //
+        for(int[] p: prerequisites){
+            adjList.get(p[1]).add(p[0]);
+            indegrees[p[0]] ++;
+        }
+        Queue<Integer> q = new ArrayDeque<>();
+
+        for (int i = 0; i < numCourses; i++) {
+            if(indegrees[i] == 0) q.add(i);
+        }
+        while(!q.isEmpty()){
+            numCourses -- ;
+            int c = q.poll();
+            for(int suc: adjList.get(c)){
+                indegrees[suc] --;
+                if(indegrees[suc] == 0) q.add(suc);
+            }
+        }
+        return numCourses == 0;
+    }
+
+    // 764
+    public int orderOfLargestPlusSign(int N, int[][] mines) {
+        int[][] dp = new int[N][N];
+        Set<Integer> zeros = new HashSet<>();
+        for(int[] m : mines){
+            zeros.add(m[0] * N + m[1]);
+        }
+
+        int res = 0;
+
+        for(int r = 0;r < N;r ++){
+            int cntOnes = 0;
+            for(int c = 0;c < N;c ++){ // 左到右
+                if(zeros.contains(r * N + c)) cntOnes = 0;
+                else cntOnes ++;
+//                cntOnes = zeros.contains(r * N + c) ? 0 : cntOnes ++;
+                dp[r][c] = cntOnes;
+            }
+//            System.out.println(Arrays.toString(dp[r]));
+            cntOnes = 0;
+            for(int c = N - 1;c >= 0;c --){ // 右到左
+                System.out.println(zeros.contains(r * N + c));
+                if(zeros.contains(r * N + c)) cntOnes = 0;
+                else cntOnes ++;
+//                cntOnes = zeros.contains(r * N + c) ? 0 : cntOnes ++;
+                dp[r][c] = Math.min(dp[r][c], cntOnes);
+            }
+        }
+        for(int c = 0;c < N;c ++){
+            int cntOnes = 0;
+            for(int r = 0;r < N;r ++){ // 上到下
+//                cntOnes = zeros.contains(r * N + c) ? 0 : cntOnes ++;
+                if(zeros.contains(r * N + c)) cntOnes = 0;
+                else cntOnes ++;
+
+                dp[r][c] = Math.min(dp[r][c], cntOnes);
+            }
+            cntOnes = 0;
+            for(int r = N - 1;r >= 0;r --){ // 下到上
+//                cntOnes = zeros.contains(r * N + c) ? 0 : cntOnes ++;
+                if(zeros.contains(r * N + c)) cntOnes = 0;
+                else cntOnes ++;
+                dp[r][c] = Math.min(dp[r][c], cntOnes);
+                res = Math.max(res,dp[r][c]);
+            }
+        }
+        return res;
+    }
+
+    // 好像是错的
     public boolean exist(char[][] board, String word) {
         int M = board.length;
         int N = board[0].length;
@@ -357,7 +457,10 @@ public class Solution_graph {
 //        s.solveSudoku(sudoku);
 //        System.out.println(sudoku);
 
-        System.out.println(s.solveNQueens(4));
+//        System.out.println(s.solveNQueens(4));
+
+//        System.out.println(s.canFinish(2, new int[][]{{1, 0}}));
+        System.out.println(s.orderOfLargestPlusSign(5, new int[][]{{4,2}}));
 
 
     }
