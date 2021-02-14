@@ -1106,13 +1106,55 @@ public class Solution {
         stack.addLast(0);
         for(int i = 1;i < heights.length;i ++){
             while (heights[i] < heights[stack.peekLast()]) {//                int left = stack.pollLast();
-//                System.out.printf("%d %d %d\n",i, heights[i], left);
+
                 int left = stack.pollLast();
-                maxArea = Math.max(maxArea, heights[left] * (i - stack.peekLast() - 1));
+                int curArea = heights[left] * (i - stack.peekLast() - 1);
+                maxArea = Math.max(maxArea, curArea);
+                System.out.printf("i:%d, stackPeek:%d, width:%d, height:%d, left:%d, curArea:%d\n",i, stack.peekLast(), i - stack.peekLast() - 1,heights[left], left, curArea);
             }
             stack.addLast(i);
         }
         return maxArea;
+    }
+
+    // 68
+    public List<String> fullJustify(String[] words, int maxWidth) {
+        int blank = 0, idx = 0, wrdCnt = 0;
+        List<String> res = new ArrayList<>();
+
+        while(idx < words.length) {
+            blank = maxWidth;
+            wrdCnt = 0;
+            while(idx < words.length && blank >= words[idx].length()){
+                blank -= words[idx].length();
+                blank -= 1;
+                idx ++;
+                wrdCnt ++;
+            }
+            blank = blank + wrdCnt;
+            StringBuilder tmp = new StringBuilder();
+            System.out.printf("blank:%d\n", blank);
+            if(wrdCnt == 1){
+                tmp.append(words[idx - 1]);
+                for (int i = 0; i < blank; i++) tmp.append(" ");
+            }else{
+                for (int i = wrdCnt; i >= 1; i --) {
+                    System.out.printf("idx:%d, i:%d,  idx - i:%d\n", idx, i, idx - i);
+                    tmp.append(words[idx - i]);
+                    int avgBlank = blank / (wrdCnt - 1);
+                    int resBlank = blank % (wrdCnt - 1);
+                    System.out.printf("avgBlank:%d, resBlank:%d\n", avgBlank, resBlank);
+                    if(i != 1) for (int j = 0; j < avgBlank; j++) tmp.append(" ");
+                    if(i > wrdCnt - resBlank) tmp.append(" ");
+                }
+            }
+            System.out.println(new String(tmp));
+            res.add(new String(tmp));
+        }
+//        for(String s : res){
+//            System.out.println(s);
+//        }
+        return res;
     }
 
     // 494
@@ -1346,7 +1388,7 @@ public class Solution {
         }
     }
 
-    // 140 解3 Trie
+    // 140 解3 Trie 见 solution_tree
 
     // 10
     public boolean matches(char[] sArr, char[] pArr, int i, int j){
@@ -1413,10 +1455,13 @@ public class Solution {
     public int numDecodings(String s) {
         // 对0 分类讨论
         int[] dp = new int[s.length() + 1];
-        char[] sArr = s.toCharArray();
-        if(sArr[0] == '0') return 0; // s = "0" "01"
+        char[] sA = s.toCharArray();
+        if(sA[0] == '0') return 0; // s = "0" "01"
         dp[0] = 1;
         dp[1] = 1;
+        char[] sArr = new char[s.length() + 1];
+        System.arraycopy(sA, 0, sArr, 1, s.length());
+        sArr[0] = 'p';
         for(int i = 2;i <= s.length();i ++){
             if(sArr[i] == '0'){
                 if(sArr[i - 1] == '1' || sArr[i - 1] == '2'){
@@ -1424,10 +1469,12 @@ public class Solution {
                 }
                 else return 0;// 没有解码方式
             }else{
-                if(sArr[i - 1] == '1' || (sArr[i - 1] == '2' && sArr[i] <= '6')) dp[i] = dp[i - 1] + dp[i - 2];
-
+                if(sArr[i - 1] == '1' || (sArr[i - 1] == '2' && sArr[i] <= '6'))
+                    dp[i] = dp[i - 1] + dp[i - 2];
+                else{
+                    dp[i] = dp[i - 1];
+                }
             }
-            dp[i - 1] = dp[i - 2];
         }
         return dp[s.length()];
     }
@@ -1441,10 +1488,10 @@ public class Solution {
         return res;
     }
 
-    public void dfs(String s, int segStart, List<String> path, List<String> res){
+    public void dfs(String s, int segStart, List<Integer> path, List<String> res){
         if(segStart == s.length() && path.size() == 4){
             StringBuilder sb = new StringBuilder();
-            for(String p: path){
+            for(int p: path){
                 sb.append(p);
                 sb.append('.');
             }
@@ -1465,7 +1512,8 @@ public class Solution {
             seg = seg * 10 + s.charAt(i) - '0';
             if(s.charAt(segStart) == '0' && i - segStart >= 1) break;
             if(seg >= 0 && seg <= 0xFF){
-                path.add(String.valueOf(seg));
+                path.add(seg);
+//                path.add(String.valueOf(seg));
 //                System.out.println(path.toString());
                 dfs(s, i + 1, path, res);
                 path.remove(path.size() - 1);
@@ -2157,7 +2205,7 @@ private void swap(char[] nums, int i, int j) {
             for(int i = 0;i <= j;i ++){ // 为了接受左下到右上的更新，先行后列的更新顺序错了
                 if(s.charAt(i) == s.charAt(j) && (j - i < 2 || dp[i + 1][j - 1])){
                     dp[i][j] = true;
-                    System.out.printf("%d %d\n", i, j);
+                    System.out.printf("%d %d\n", i + 1, j - 1);
                     cnt ++;
                 }
             }
@@ -2433,6 +2481,24 @@ private void swap(char[] nums, int i, int j) {
         return mergeCnt327(sum, 0, nums.length - 1, lower, upper);
     }
 
+    // √ BIT
+    public int countRangeSum3(int[] nums, int lower, int upper) {
+        int total = 0;
+        Fenwick tree = new Fenwick(nums);
+        for (int i = 0; i < nums.length; i++) {
+            tree.update(i + 1, nums[i]);
+        }
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i; j < nums.length; j++) {
+                long sum = tree.query(j + 1) - tree.query(i);
+                if( sum >= lower && sum <= upper) {
+                    total ++;
+                }
+            }
+        }
+        return total;
+    }
+
     // TODO: 327 BIT 解 + 离散化 + 前缀和
     public int countRangeSum2(int[] nums, int lower, int upper) {
         int total = 0;
@@ -2443,10 +2509,10 @@ private void swap(char[] nums, int i, int j) {
         for (int i = 1; i <= nums.length; i++) {
             prefix[i] = prefix[i - 1] + nums[i - 1];
             pq.add(prefix[i]);
-            System.out.printf("prefix: %d\n", prefix[i]);
+//            System.out.printf("prefix: %d\n", prefix[i]);
             pq.add(prefix[i] - lower);
-            System.out.printf("added: %d\n", prefix[i] - lower);
-            System.out.printf("added: %d\n", prefix[i] - upper);
+//            System.out.printf("added: %d\n", prefix[i] - lower);
+//            System.out.printf("added: %d\n", prefix[i] - upper);
             pq.add(prefix[i] - upper);
         }
 
@@ -2454,7 +2520,7 @@ private void swap(char[] nums, int i, int j) {
         int rank = 1;
         while(!pq.isEmpty()){
             long key = pq.poll();
-            System.out.printf("key: %d\n", key);
+//            System.out.printf("key: %d\n", key);
             map.put(key, rank);
             rank ++;
         }
@@ -2463,8 +2529,8 @@ private void swap(char[] nums, int i, int j) {
         System.out.println(Arrays.toString(prefix));
         for (int i = 1; i <= nums.length; i++) {
             long val = prefix[i];
-            System.out.println(val - lower);
-            System.out.println(val - upper);
+//            System.out.println(val - lower);
+//            System.out.println(val - upper);
             int high_rank = map.get(val - lower);
             int low_rank = map.get(val - upper);
             rank = map.get(val);
@@ -2838,6 +2904,93 @@ private void swap(char[] nums, int i, int j) {
 
     // 70, 198 滚动数组代替dp[], 减少异常处理情况： nums.length == 0 或1
 
+//    public String longestPalindrome(String s) {
+//
+//        int N = s.length();
+//        boolean[][] dp = new boolean[N][N];
+//        int maxLen = 0, start = 0;
+//        for (int j = 0; j < N; j++) {
+//            for (int i = 0; i <= j; i++) {
+//                if(i == j) dp[i][j] = true;
+//                else if(s.charAt(i) == s.charAt(j)){
+//                    if(j == i + 1) dp[i][j] = true;
+//                    else dp[i][j] = dp[i + 1][j - 1];
+//                }
+//
+//            }
+//        }
+//        for (int i = 0; i < N; i++) {
+//            for (int j = 0; j < N; j++) {
+//                if(dp[i][j] && j - i > maxLen){
+//                    maxLen = j - i;
+//                    start = i;
+//                }
+//            }
+////            System.out.println(Arrays.toString(dp[i]));
+//        }
+//        return s.substring(start, start + maxLen + 1);
+//    }
+public String longestPalindrome(String s) {
+    int N = s.length();
+    int[][] dp = new int[N][N];
+    for (int i = N - 1; i > -1; i --) {
+        for (int j = i ; j < N; j++) {
+            if (i == j) dp[i][j] = 1;
+            else if (s.charAt(i) == s.charAt(j)) {
+                if (j == i + 1) dp[i][j] = 2;
+                else dp[i][j] = dp[i + 1][j - 1] + 2;
+            } else {
+                dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
+            }
+        }
+    }
+    for (int i = 0; i < N; i++) {
+            System.out.println(Arrays.toString(dp[i]));
+        }
+    int maxLen = 0, start = 0;
+    for (int i = 0; i < N; i++) {
+        for (int j = i + 1; j < N; j++) {
+            if (dp[i][j] > maxLen) {
+                maxLen = dp[i][j];
+                start = i;
+            }
+        }
+    }
+    return s.substring(start, start + maxLen);
+}
+//public int longestPalindromeSubseq(String s) {
+//    int N = s.length();
+//    int[][] dp = new int[N][N];
+////    dp[0][0] = 1;
+//    for (int i = N - 1; i > -1; i --) {
+//        for (int j = i; j < N; j ++) {
+//            if(i == j) dp[i][j] = 1;
+//            else if(j == i + 1) dp[i][j] = 2;
+//            else if(s.charAt(i) == s.charAt(j)) dp[i][j] = Math.max(Math.max(dp[i + 1][j], dp[i][j - 1]), dp[i + 1][j - 1] + 2);
+//            else if(s.charAt(i) != s.charAt(j))dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
+//        }
+//
+//    }
+//    for (int i = 0; i < N; i++) {
+//        System.out.println(Arrays.toString(dp[i]));
+//    }
+//    return dp[0][N - 1];
+//}
+public int longestPalindromeSubseq(String s) {
+    int N = s.length();
+    int[][] dp = new int[N][N];
+    dp[0][0] = 1;
+    for (int i = N - 1; i > -1; i --) {
+        for (int j = i; j < N; j++) {
+            if(i == j) dp[i][j] = 1;
+            else if(s.charAt(i) == s.charAt(j) && j == i + 1) dp[i][j] = 2;
+            else if(s.charAt(i) == s.charAt(j)) dp[i][j] = Math.max(Math.max(dp[i + 1][j], dp[i][j - 1]), dp[i + 1][j - 1] + 2);
+            else dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
+        }
+
+    }
+    return dp[0][N - 1];
+}
 
 
     public static void main(String[] args) {
@@ -2984,9 +3137,9 @@ private void swap(char[] nums, int i, int j) {
 //        int[] nums = {1, 2, 3};
 //        int[] nums = {5, 1, 1};
 //        int[] nums = {2,3,1,3,3};
-        int[] nums = {1, 2};
-        s.nextPermutation(nums);
-        System.out.println(Arrays.toString(nums));
+//        int[] nums = {1, 2};
+//        s.nextPermutation(nums);
+//        System.out.println(Arrays.toString(nums));
 //        System.out.println(s.isNumber("-1e."));
 //        System.out.println(Arrays.toString(s.twoSum(2)));
 //        int[] nums2 = {1, -1};
@@ -3009,7 +3162,12 @@ private void swap(char[] nums, int i, int j) {
 //        int[] heights = {2, 1, 5, 6, 2, 3};
 //        int[] heights = {0, 1};
 //        int[] heights = {1, 1};
+//        int[] heights = {2,1,4,2,3};
 //        System.out.println(s.largestRectangleArea(heights));
+//        String[] words = {"This", "is", "an", "example", "of", "text", "justification."};
+        String[] words = {"Science","is","what","we","understand","well","enough","to","explain","to","a","computer.","Art","is","everything","else","we","do"};
+//        System.out.println(s.fullJustify(words, 16));
+        System.out.println(s.fullJustify(words, 20));
 
         //        int[] nums = {2, 4, -2, -3};
 //        System.out.println(s.increasingTriplet(nums));
@@ -3056,7 +3214,9 @@ private void swap(char[] nums, int i, int j) {
 //        String[] words = {"foo","bar"};
 //        System.out.println(s.findSubstring("barfoothefoobarman", words));
 
-        // 91
+//        // 91
+//        System.out.println(s.numDecodings("12"));
+//        System.out.println(s.numDecodings("27"));
 //        System.out.println(s.numDecodings("1212"));
 //        System.out.println(s.numDecodings("110"));
 
@@ -3123,6 +3283,11 @@ private void swap(char[] nums, int i, int j) {
 //        System.out.println(s.numberToWords(1234567));
 //        int[] nums = {1,3,2,3,4};
 //        System.out.println(s.findDuplicate(nums));
+//        System.out.println(s.longestPalindrome("cbbd"));
+//        System.out.println(s.longestPalindrome("babad"));
+//        System.out.println(s.longestPalindrome("aacabdkacaa"));
+//        System.out.println(s.longestPalindromeSubseq("abcdef"));
+//        System.out.println(s.longestPalindromeSubseq("cbbd"));
     }
 }
 class Fenwick{

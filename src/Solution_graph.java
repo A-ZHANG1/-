@@ -6,6 +6,9 @@ import java.util.LinkedList;
  */
 public class Solution_graph {
     public boolean canFinish(int numCourses, int[][] prerequisites){
+        // 课程从0开始编号，用list<List<Integer>>做邻接表能get(courseID)
+        // 相似的 802，用list<Set<Integer>>做邻接表
+        // 一般的元素（char,非从0开始编号）最好做map
         List<List<Integer>> adjList = new ArrayList<>();// 转换为图的邻接链表表示
         for (int i = 0; i < numCourses; i++) {
             adjList.add(new ArrayList<>());
@@ -28,7 +31,7 @@ public class Solution_graph {
         visited[idx] = 0;
         return true;
     }
-    // bfs 拓扑排序
+    // bfs 拓扑排序 法一：求indegree； 法二：写rgraph(见802)
     public boolean canFinishbfs(int numCourses, int[][] prerequisites){
         List<List<Integer>> adjList = new ArrayList<>();
         for (int i = 0; i < numCourses; i++) {
@@ -55,54 +58,122 @@ public class Solution_graph {
         return numCourses == 0;
     }
 
-    // 764
-    public int orderOfLargestPlusSign(int N, int[][] mines) {
-        int[][] dp = new int[N][N];
-        Set<Integer> zeros = new HashSet<>();
-        for(int[] m : mines){
-            zeros.add(m[0] * N + m[1]);
-        }
+    // 并查集
 
-        int res = 0;
-
-        for(int r = 0;r < N;r ++){
-            int cntOnes = 0;
-            for(int c = 0;c < N;c ++){ // 左到右
-                if(zeros.contains(r * N + c)) cntOnes = 0;
-                else cntOnes ++;
-//                cntOnes = zeros.contains(r * N + c) ? 0 : cntOnes ++;
-                dp[r][c] = cntOnes;
-            }
-//            System.out.println(Arrays.toString(dp[r]));
-            cntOnes = 0;
-            for(int c = N - 1;c >= 0;c --){ // 右到左
-                System.out.println(zeros.contains(r * N + c));
-                if(zeros.contains(r * N + c)) cntOnes = 0;
-                else cntOnes ++;
-//                cntOnes = zeros.contains(r * N + c) ? 0 : cntOnes ++;
-                dp[r][c] = Math.min(dp[r][c], cntOnes);
+    // 802
+    public List<Integer> eventualSafeNodes(int[][] G) {
+        int N = G.length;
+        List<Set<Integer>> graph = new ArrayList<>();
+        List<Set<Integer>> rgraph = new ArrayList<>();
+        Deque<Integer> q = new ArrayDeque<>();
+        for (int i = 0; i < N; i++) {
+            if(G[i].length == 0) q.addLast(i);
+            for(int nei: G[i]){
+                graph.get(i).add(nei);
+                rgraph.get(nei).add(i);
             }
         }
-        for(int c = 0;c < N;c ++){
-            int cntOnes = 0;
-            for(int r = 0;r < N;r ++){ // 上到下
-//                cntOnes = zeros.contains(r * N + c) ? 0 : cntOnes ++;
-                if(zeros.contains(r * N + c)) cntOnes = 0;
-                else cntOnes ++;
-
-                dp[r][c] = Math.min(dp[r][c], cntOnes);
+        boolean[] safe = new boolean[N];
+        while(!q.isEmpty()){
+            int i = q.poll();
+            safe[i] = true;
+            for (int j : rgraph.get(i)) {
+                graph.get(j).remove(i);
+                if(graph.get(j).isEmpty()) q.addLast(j);
             }
-            cntOnes = 0;
-            for(int r = N - 1;r >= 0;r --){ // 下到上
-//                cntOnes = zeros.contains(r * N + c) ? 0 : cntOnes ++;
-                if(zeros.contains(r * N + c)) cntOnes = 0;
-                else cntOnes ++;
-                dp[r][c] = Math.min(dp[r][c], cntOnes);
-                res = Math.max(res,dp[r][c]);
-            }
+        }
+        List<Integer> res = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            if(safe[i]) res.add(i);
         }
         return res;
     }
+    //
+    // 764
+    public int orderOfLargestPlusSign(int N, int[][] mines) {
+        int[][][] dp = new int[N][N][4];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if((i == 0 || j == 0) && mines[i][j] == 1) {
+                    dp[i][j][0] = 1;
+                    dp[i][j][1] = 1;
+                    dp[i][j][2] = 1;
+                    dp[i][j][3] = 1;
+                }
+            }
+        }
+        for (int i = 1; i < N; i++) {
+            for (int j = 1; j < N; j++) {
+                if(mines[i][j] == 1){
+                    dp[i][j][0] = dp[i][j - 1][0] + 1;
+                    dp[i][j][1] = dp[i - 1][j][1] + 1;
+                }
+            }
+        }
+        for (int i = N - 2; i > 0; i--) {
+            for (int j = N - 2; j > 0; j--) {
+                if(mines[i][j] == 1){
+                    dp[i][j][1] = dp[i + 1][j][2] + 1;
+                    dp[i][j][1] = dp[i][j + 1][3] + 1;
+                }
+            }
+        }
+        int max = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                int min = Math.min(Math.min(dp[i][j][0], dp[i][j][1]), Math.min(dp[i][j][2], dp[i][j][3]));
+                max = Math.max(max, dp[i][j][0]);
+            }
+        }
+        return max;
+    }
+//    public int orderOfLargestPlusSign(int N, int[][] mines) {
+//        int[][] dp = new int[N][N];
+//        Set<Integer> zeros = new HashSet<>();
+//        for(int[] m : mines){
+//            zeros.add(m[0] * N + m[1]);
+//        }
+//
+//        int res = 0;
+//
+//        for(int r = 0;r < N;r ++){
+//            int cntOnes = 0;
+//            for(int c = 0;c < N;c ++){ // 左到右
+//                if(zeros.contains(r * N + c)) cntOnes = 0;
+//                else cntOnes ++;
+////                cntOnes = zeros.contains(r * N + c) ? 0 : cntOnes ++;
+//                dp[r][c] = cntOnes;
+//            }
+////            System.out.println(Arrays.toString(dp[r]));
+//            cntOnes = 0;
+//            for(int c = N - 1;c >= 0;c --){ // 右到左
+//                System.out.println(zeros.contains(r * N + c));
+//                if(zeros.contains(r * N + c)) cntOnes = 0;
+//                else cntOnes ++;
+////                cntOnes = zeros.contains(r * N + c) ? 0 : cntOnes ++;
+//                dp[r][c] = Math.min(dp[r][c], cntOnes);
+//            }
+//        }
+//        for(int c = 0;c < N;c ++){
+//            int cntOnes = 0;
+//            for(int r = 0;r < N;r ++){ // 上到下
+////                cntOnes = zeros.contains(r * N + c) ? 0 : cntOnes ++;
+//                if(zeros.contains(r * N + c)) cntOnes = 0;
+//                else cntOnes ++;
+//
+//                dp[r][c] = Math.min(dp[r][c], cntOnes);
+//            }
+//            cntOnes = 0;
+//            for(int r = N - 1;r >= 0;r --){ // 下到上
+////                cntOnes = zeros.contains(r * N + c) ? 0 : cntOnes ++;
+//                if(zeros.contains(r * N + c)) cntOnes = 0;
+//                else cntOnes ++;
+//                dp[r][c] = Math.min(dp[r][c], cntOnes);
+//                res = Math.max(res,dp[r][c]);
+//            }
+//        }
+//        return res;
+//    }
 
     // 好像是错的
     public boolean exist(char[][] board, String word) {

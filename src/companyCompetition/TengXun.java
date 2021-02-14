@@ -1,3 +1,5 @@
+package companyCompetition;
+
 import java.util.*;
 
 /**
@@ -24,8 +26,8 @@ public class TengXun {
 
     public boolean isValid(String s) {
         Deque<Character> stack1 = new ArrayDeque<>();
-        Deque<Character> stack2 = new ArrayDeque<>();
-        Deque<Character> stack3 = new ArrayDeque<>();
+//        Deque<Character> stack2 = new ArrayDeque<>();
+//        Deque<Character> stack3 = new ArrayDeque<>();
         for(char c: s.toCharArray()){
             switch(c){
                 case '(':stack1.addLast(c); break;

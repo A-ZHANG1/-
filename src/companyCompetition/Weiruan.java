@@ -18,6 +18,9 @@ public class Weiruan {
         return res;
     }
 
+    /*
+    1519 子树中标签相同的节点数
+     */
     public int[] countSubTrees(int n, int[][] edges, String labels) {
         // 用arraylist的数组做邻接链表
         List<Integer>[] points = new List[n];

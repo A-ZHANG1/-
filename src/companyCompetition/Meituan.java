@@ -359,8 +359,6 @@ public class Meituan {
                 earning += 200 * tasks[i].time + 3 * tasks[i].grade;
             }
         }
-
-
         System.out.printf("%d %d", cnt, earning);
     }
 
@@ -368,7 +366,6 @@ public class Meituan {
     public void ip(String hexIp){
         String res = "";
         String[] ips = hexIp.split(":");
-        int[] h = {10,};
         for(int i = 0;i < 8;i += 2){
             long ip = 0;
 //            String subIp = String.format("%04d",Integer.valueOf(ips[i])) + String.format("%04d",Integer.valueOf(ips[i + 1])); // 不足4位长度的在前面补0（没有字母的时候可以用）
