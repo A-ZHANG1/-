@@ -54,6 +54,25 @@ public class Solution_LinkedList {
             System.out.println("Empty LinkedList");
         }
     }
+    // 24
+    public ListNode swapPairs(ListNode head) {
+        if(head == null) return head;
+        ListNode dummy = new ListNode(-1);
+        ListNode prev = dummy, first = head, second, next;
+        while(first != null && first.next != null){
+            second = first.next;
+            next = second.next;
+
+            first.next = second.next;
+            second.next = next;
+            prev.next = second;
+
+            prev = first;
+            first = next;
+            System.out.println(first.val);
+        }
+        return dummy.next;
+    }
     // 100163
 //    public ListNode removeDuplicateNodes(ListNode head) {
 //        ListNode cur = head.next;
@@ -92,10 +111,36 @@ public class Solution_LinkedList {
     }
 
     // 148
+//    public ListNode sortList(ListNode head) {
+//        if(head == null || head.next == null) return head;
+//        ListNode fast = head.next, slow = head;
+//        while(fast != null && fast.next != null){
+//            fast = fast.next.next;
+//            slow = slow.next;
+//        }
+//        ListNode mid = slow.next;
+//        slow.next = null;
+//        ListNode left = sortList(head);
+//        ListNode right = sortList(mid);
+//        ListNode dummyHead = new ListNode(0);
+//        ListNode cur = dummyHead;
+//        while(left != null && right != null){
+//            if(left.val < right.val){
+//                cur.next = left;
+//                left = left.next;
+//            }else{
+//                cur.next = right;
+//                right = right.next;
+//            }
+//            cur = cur.next;
+//        }
+//        cur.next = left != null ? left : right;
+//        return dummyHead.next;
+//    }
     public ListNode sortList(ListNode head) {
-        if(head == null || head.next == null) return head;
-        ListNode fast = head.next, slow = head;
-        while(fast != null && fast.next != null){
+        if(head == null) return head;
+        ListNode fast = head, slow = head;
+        while(fast.next != null && fast.next.next != null){
             fast = fast.next.next;
             slow = slow.next;
         }
@@ -103,43 +148,60 @@ public class Solution_LinkedList {
         slow.next = null;
         ListNode left = sortList(head);
         ListNode right = sortList(mid);
-        ListNode dummyHead = new ListNode(0);
-        ListNode cur = dummyHead;
+
+        ListNode dummy = new ListNode(-1);
+        ListNode cur = dummy;
+
         while(left != null && right != null){
             if(left.val < right.val){
-                cur.next = left;
+                cur = left;
                 left = left.next;
-            }else{
-                cur.next = right;
+            }
+            else{
+                cur = right;
                 right = right.next;
             }
             cur = cur.next;
         }
-        cur.next = left != null ? left : right;
-        return dummyHead.next;
+        cur.next = left!= null ? left : right;
+        System.out.println(cur);
+        return dummy.next;
     }
-    // 147
-    public ListNode insertionSortList(ListNode head) {
-        ListNode prev = head, cur = head, dummy = new ListNode(Integer.MIN_VALUE);
-        dummy.next = head;
-        while(cur != null){
-            if(prev.val <= cur.val) {
-                prev = cur;
-                cur = cur.next;
-            }
-            else{
-                ListNode p = dummy;
-                while(p != prev && p.next.val < cur.val){
-                    p = p.next;
-                }
-                // prev始终指向已排序链表末尾
-                prev.next = cur.next;
-                // cur 插入到p和p.next之间
-                cur.next = p.next;
-                p.next = cur;
 
-                cur = prev.next;
-            }
+    // 147
+//    public ListNode insertionSortList(ListNode head) {
+//        ListNode prev = head, cur = head, dummy = new ListNode(Integer.MIN_VALUE);
+//        dummy.next = head;
+//        while(cur != null){
+//            if(prev.val <= cur.val) {
+//                prev = cur;
+//                cur = cur.next;
+//            }
+//            else{
+//                ListNode p = dummy;
+//                while(p != prev && p.next.val < cur.val){
+//                    p = p.next;
+//                }
+//                // prev始终指向已排序链表末尾
+//                prev.next = cur.next;
+//                // cur 插入到p和p.next之间
+//                cur.next = p.next;
+//                p.next = cur;
+//
+//                cur = prev.next;
+//            }
+//        }
+//        return dummy.next;
+//    }
+    public ListNode insertionSortList(ListNode head) {
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        ListNode cur = head;
+        while(head != null){
+            head = dummy;
+            while(cur.next != null && cur.next.val > head.val) cur = cur.next;
+            head.next = cur.next;
+            cur.next = head;
         }
         return dummy.next;
     }
@@ -294,6 +356,9 @@ public class Solution_LinkedList {
         Solution_LinkedList s = new Solution_LinkedList();
 //        ListNode head = s.stringToListNode("[1, 2, 3, 3,3,2, 1]");
 //        s.prettyPrintLinkedList(s.removeDuplicateNodes(head));
+        ListNode head = s.stringToListNode("[1, 2, 3, 4]");
+        s.prettyPrintLinkedList(s.swapPairs(head));
+
 //        ListNode head = s.stringToListNode("[4,2,1,3]");
 //        s.prettyPrintLinkedList(s.sortList(head));
 //        ListNode head = s.stringToListNode("[4,2,1,3]");
@@ -310,9 +375,9 @@ public class Solution_LinkedList {
 //        s.prettyPrintLinkedList(s.reverseKGroup(head, 3));
 //        ListNode head = s.stringToListNode("[1,4,3,2,5,2]");
 //        s.prettyPrintLinkedList((s.partition(head, 3)));
-        ListNode head = s.stringToListNode("[1,2,3,4]");
-        ListNode[] reses = s.splitListToParts(head, 5);
-        for(ListNode res: reses) s.prettyPrintLinkedList(res);
+//        ListNode head = s.stringToListNode("[1,2,3,4]");
+//        ListNode[] reses = s.splitListToParts(head, 5);
+//        for(ListNode res: reses) s.prettyPrintLinkedList(res);
 
 
     }

@@ -5,16 +5,16 @@ import java.util.LinkedList;
  * Created by Wayne.A.Z on 2020-07-26.
  */
 public class Solution_graph {
-    public boolean exist(char[][] board, String word) {
-        int M = board.length;
-        int N = board[0].length;
-        for(int i = 0;i < M;i ++){
-            for(int j = 0;j < N;j ++){
-                if(backtrack(board, word, 0, i, j)) return true;
-            }
-        }
-        return false;
-    }
+//    public boolean exist(char[][] board, String word) {
+//        int M = board.length;
+//        int N = board[0].length;
+//        for(int i = 0;i < M;i ++){
+//            for(int j = 0;j < N;j ++){
+//                if(backtrack(board, word, 0, i, j)) return true;
+//            }
+//        }
+//        return false;
+//    }
 
     public boolean backtrack(char[][] board, String word, int start, int r, int c){
         int M = board.length;
@@ -28,6 +28,23 @@ public class Solution_graph {
                 backtrack(board, word, start + 1, r , c - 1)) return true;
         board[r][c] = tmp;
         return false;
+    }
+
+    // 200
+    int cnt = 0;
+    public int numIslands(char[][] grid) {
+        return dfs(grid, 0, 0);
+    }
+    public int dfs(char[][] grid, int r, int c){
+        if(r < 0 || r == grid.length || c < 0 || c == grid[0].length) return 0;
+        int[] dirs = {-1, 0, 1, 0 , -1};
+        if(grid[r][c] == '0') return 0;
+        grid[r][c] = '0';
+        for (int i = 0; i < 4; i++) {
+            dfs(grid, r + dirs[i], c + dirs[i + 1]);
+            cnt ++;
+        }
+        return cnt;
     }
 
     // 1719 dfs
@@ -200,6 +217,42 @@ public class Solution_graph {
         return false;
     }
 
+    // 79
+    char[][] board;
+    String word;
+
+    public boolean exist(char[][] board, String word) {
+        this.board = board;
+        this.word = word;
+        for(int i = 0;i < board.length;i ++){
+            for(int j = 0;j < board[i].length;j ++){
+                if(dfs(i, j, 0)) return true;
+            }
+        }
+        return false;
+    }
+    public boolean dfs(int r, int c, int start){
+        if(start == word.length() - 1){
+            return board[r][c] == word.charAt(start);
+        }
+        int[] dirs = {1, 0, -1, 0, 1};
+        if(board[r][c] == word.charAt(start)){
+
+            board[r][c] = 0;
+            for(int i = 0;i < 4;i ++){
+                int mx = r + dirs[i];
+                int my = c + dirs[i + 1];
+                char tmp = board[mx][my];
+                if(mx >= 0 && mx < board.length && my >= 0 && my < board[0].length && board[mx][my] != 0){
+                    if(dfs(mx, my, start + 1)) return true;
+                    board[r][c] = tmp;
+                    }
+            }
+        }
+        return false; 
+    }
+    
+
     // 733
     public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
         Queue<int[]> q = new LinkedList<>(); //
@@ -265,7 +318,7 @@ public class Solution_graph {
 
     List<List<String>> res = new ArrayList<>();
     int n;
-    char[][] board;
+//    char[][] board;
 
     public boolean couldPlace( int row, int col) {
         // 检查列是否有皇后互相冲突
@@ -357,7 +410,10 @@ public class Solution_graph {
 //        s.solveSudoku(sudoku);
 //        System.out.println(sudoku);
 
-        System.out.println(s.solveNQueens(4));
+        // System.out.println(s.solveNQueens(4));
+        char[][] grid = {{'1','1','0','0','0'},{'1','1','0','0','0'},{'0','0','1','0','0'},{'0','0','0','1','1'}};
+        System.out.println(s.numIslands(grid));
+        
 
 
     }

@@ -4,6 +4,7 @@ import java.util.stream.Collectors;
 import java.util.stream.*;
 import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.concurrent.ForkJoinPool;
 
 
 /**
@@ -67,13 +68,13 @@ public class Solution {
     }
 
     // 65
-    // TODO è¡¨é©±åŠ¨æ³• çŠ¶æ€æœºæ³•
+    // TODO ±íÇı¶¯·¨ ×´Ì¬»ú·¨
     /*
 
     * false:
     *  e. ..
-    *  ee eå‰æ— num
-    *  +-ä¸åœ¨é¦–æˆ–eå
+    *  ee eÇ°ÎŞnum
+    *  +-²»ÔÚÊ×»òeºó
     * 0e
      */
     public boolean isNumber(String s) {
@@ -97,11 +98,11 @@ public class Solution {
         return numSeen;
     }
 
-        // 1144 åˆ†ç±»è®¨è®º
+        // 1144 ·ÖÀàÌÖÂÛ
     public int movesToMakeZigzag(int[] nums) {
-//        int[] tmp = nums; //è½¯æ‹·è´,åŒä¸€å†…å­˜åœ°å€,å†…å®¹å†…å­˜ä»…ä»…å­˜åœ¨1ä»½
+//        int[] tmp = nums; //Èí¿½±´,Í¬Ò»ÄÚ´æµØÖ·,ÄÚÈİÄÚ´æ½ö½ö´æÔÚ1·İ
         int[] tmp = Arrays.copyOf(nums, nums.length);
-        return Math.min(compute(tmp, 0),compute(nums, 1));// åˆ†ç±»è®¨è®º å¶æ•°ä½è¾ƒå¤§ å¥‡æ•°ä½è¾ƒå¤§
+        return Math.min(compute(tmp, 0),compute(nums, 1));// ·ÖÀàÌÖÂÛ Å¼ÊıÎ»½Ï´ó ÆæÊıÎ»½Ï´ó
     }
 
     private int compute(int[] nums, int idx){
@@ -118,7 +119,7 @@ public class Solution {
                 res += nums[r] - nums[i] + 1;
                 nums[r] = nums[i] - 1;
             }
-            System.out.println(java.util.Arrays.toString(nums)); // æ‰“å°æ•°ç»„å…ƒç´ debug
+            System.out.println(java.util.Arrays.toString(nums)); // ´òÓ¡Êı×éÔªËØdebug
         }
         return res;
     }
@@ -142,13 +143,13 @@ public class Solution {
         int dp[] = new int[45];
         dp[0] = 1;
         dp[1] = 1;
-        // æ±‚æ‰€æœ‰fibæ•°ã€‚45: 10 ^ 9
+        // ÇóËùÓĞfibÊı¡£45: 10 ^ 9
         for(int i = 2;i<45;i++){
             dp[i] = dp[i-1]+dp[i-2];
         }
         System.out.println(Arrays.toString(dp));
 
-        // è´ªå¿ƒ
+        // Ì°ĞÄ
         int s = 0;
         for(int j = 44;j>=0;j--){
             if(k >= dp[j]){
@@ -160,11 +161,11 @@ public class Solution {
     }
 
 
-    // 309 èŠ±èŠ±é…± ä»çŠ¶æ€æœºçœ‹dpæ–¹ç¨‹ https://www.bilibili.com/video/BV1qW411C7Xc/?spm_id_from=333.788.videocard.1
+    // 309 »¨»¨½´ ´Ó×´Ì¬»ú¿´dp·½³Ì https://www.bilibili.com/video/BV1qW411C7Xc/?spm_id_from=333.788.videocard.1
     public int maxProfit(int[] prices) {
         int len = prices.length;
-        int[][] dp = new int[len + 1][3]; // i: å¤©æ•°ï¼Œj 0, 1, 2åˆ†åˆ«å¯¹åº”hold, sold, rest
-//        int[] hold = {Integer.MIN_VALUE}, sold = {0}, rest = {0};// é™æ€æ•°ç»„
+        int[][] dp = new int[len + 1][3]; // i: ÌìÊı£¬j 0, 1, 2·Ö±ğ¶ÔÓ¦hold, sold, rest
+//        int[] hold = {Integer.MIN_VALUE}, sold = {0}, rest = {0};// ¾²Ì¬Êı×é
         dp[0][0] = Integer.MIN_VALUE;
         dp[0][1] = 0;
         dp[0][2] = 0;
@@ -179,10 +180,10 @@ public class Solution {
         return Math.max(dp[len][1], dp[len][2]);
     }
 
-    // 714 æ²¡æœ‰cooldown(rest)çŠ¶æ€. è‚¡ç¥¨é—®é¢˜å®˜æ–¹é¢˜è§£ https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/solution/yi-ge-fang-fa-tuan-mie-6-dao-gu-piao-wen-ti-by-lab/
+    // 714 Ã»ÓĞcooldown(rest)×´Ì¬. ¹ÉÆ±ÎÊÌâ¹Ù·½Ìâ½â https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/solution/yi-ge-fang-fa-tuan-mie-6-dao-gu-piao-wen-ti-by-lab/
     public int maxProfit(int[] prices, int fee) {
         int len = prices.length;
-        int[][] dp = new int[len + 1][2]; // i: å¤©æ•°. 0ä¸ºåˆå§‹çŠ¶æ€,1ä¸ºç¬¬ä¸€å¤©ï¼›j 0, 1åˆ†åˆ«å¯¹åº”hold, sold
+        int[][] dp = new int[len + 1][2]; // i: ÌìÊı. 0Îª³õÊ¼×´Ì¬,1ÎªµÚÒ»Ìì£»j 0, 1·Ö±ğ¶ÔÓ¦hold, sold
         dp[0][0] = Integer.MIN_VALUE;
         dp[0][1] = 0;
         for(int i = 1; i <= len; i ++){
@@ -243,19 +244,19 @@ public class Solution {
         int len = nums.length;
         List<List<Integer>> res = new ArrayList<>();
         for(int i = 0;i < len - 1;i ++){
-            if(i > 0 && nums[i] == nums[i - 1]) continue; //å‰ªæ
+            if(i > 0 && nums[i] == nums[i - 1]) continue; //¼ôÖ¦
             int l = i + 1, r = len - 1;
             while(l < r){
                 sum = nums[i] + nums[l] + nums[r];
                 if(sum < 0){
-                    l++; // å»é‡
+                    l++; // È¥ÖØ
                 }
                 else if(sum > 0){
                     r--;
                 }
                 else{
                     res.add(Arrays.asList(nums[i], nums[l], nums[r]));
-                    while(l < r && nums[l] == nums[l + 1]) l++; // å»é‡
+                    while(l < r && nums[l] == nums[l + 1]) l++; // È¥ÖØ
                     while(l < r && nums[r] == nums[r - 1]) r--;
                     l ++;
                     r --;
@@ -265,28 +266,28 @@ public class Solution {
         }
         return res;
     }
-    // 139 å•è¯èƒ½æ‹†è§£æˆå­—å…¸ dp
+    // 139 µ¥´ÊÄÜ²ğ½â³É×Öµä dp
     public boolean wordBreak(String s, List<String> wordDict) {
         boolean[] dp = new boolean[s.length() + 1];
         dp[0] = true;
         for(int i = 1;i < s.length() + 1;i ++){
             for(int j = i;j >= 0;j --) {
                 String word = s.substring(j, i);
-//                if(word.equals("code")){ // == æ¯”è¾ƒå¯¹è±¡å†…å­˜åœ°å€
+//                if(word.equals("code")){ // == ±È½Ï¶ÔÏóÄÚ´æµØÖ·
 //                    System.out.println(j);
 //                    System.out.println(java.util.Arrays.toString(dp));
 //                }
-                if(wordDict.contains(word) && dp[j] == true){ // dp[j]:[0, j-1]åœ¨å­—å…¸ä¸­èƒ½æˆªå–
+                if(wordDict.contains(word) && dp[j] == true){ // dp[j]:[0, j-1]ÔÚ×ÖµäÖĞÄÜ½ØÈ¡
                     dp[i] = true;
                     break;
                 }
             }
         }
 //        System.out.println(wordDict.contains("code"));
-        return dp[s.length()];
+        return dp[s.length()]; 
     }
 
-    // 695 java å²›å±¿æœ€å¤§é¢ç§¯
+    // 695 java µºÓì×î´óÃæ»ı
     public int maxAreaOfIsland(int[][] grid) {
         int m = grid.length;
         int n = grid[0].length;
@@ -314,7 +315,64 @@ public class Solution {
         return area;
     }
 
-    // 162 æ‰¾å³°å€¼ã€‚åˆ†ä¸‰ç§æƒ…å†µè®¨è®ºã€‚æ‰¾è§„å¾‹ã€‚ --> äºŒåˆ†æŸ¥æ‰¾O(log(n))852
+    // 200
+    int cnt200 = 0;
+    public int numIslands(char[][] grid) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if(grid[i][j] == '1'){ 
+//                    System.out.printf("%d, %d",i, j);
+                    cnt200 ++;
+                    dfs(grid, i, j);
+                }  
+            }
+        }       
+        return cnt200;
+    }
+    public void dfs(char[][] grid, int r, int c){
+        grid[r][c] = '0';
+//        System.out.printf("%d, %d",r, c);
+        
+        int[] dirs = {-1, 0, 1, 0 , -1};
+        for (int i = 0; i < 4; i++) {
+            int nr =  r + dirs[i];
+            int nc =  c + dirs[i + 1];
+            if(nr < 0 || nr == grid.length || nc < 0 || nc == grid[0].length || grid[nr][nc] == '0') continue;
+            dfs(grid,nr, nc);
+        }
+    }
+    // 130
+    public void solve(char[][] board) {
+        int M = board.length;
+        int N = board[0].length;
+        if(M == 0) return;
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
+                if((i == 0 || i == M - 1 || j == 0 || j == N - 1) && board[i][j] == 'O'){ //±ê¼Ç±ßÔµµÄO
+                    dfs130(board, i, j);
+                }
+            }
+        }
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                if(board[i][j] == 'O') board[i][j] = 'X';
+                if(board[i][j] == '#') board[i][j] = 'O';
+            }
+        }
+    }
+    public void dfs130(char[][] board, int r, int c){
+        board[r][c] = '#';
+        int[] dirs = {-1, 0, 1, 0 , -1};
+        for (int i = 0; i < 4; i++) {
+            int nr =  r + dirs[i];
+            int nc =  c + dirs[i + 1];
+            if(nr <= 0 || nr == board.length || nc < 0 || nc == board[0].length || board[nr][nc] != 'O') continue;
+            dfs(board,nr, nc);
+//            board[nr][nc] = 'O';
+        }
+    }
+
+    // 162 ÕÒ·åÖµ¡£·ÖÈıÖÖÇé¿öÌÖÂÛ¡£ÕÒ¹æÂÉ¡£ --> ¶ş·Ö²éÕÒO(log(n))852
     public int findPeakElement(int[] nums) {
         for(int i = 0;i < nums.length - 1;i ++){
             if(nums[i] > nums[i + 1]){
@@ -324,7 +382,7 @@ public class Solution {
         return nums.length - 1;
     }
 
-    // å‰‘æŒ‡ 42
+    // ½£Ö¸ 42
     public int maxSubArray(int[] nums) {
         int len = nums.length;
         int[] dp = new int[len];
@@ -341,14 +399,14 @@ public class Solution {
         return res;
     }
 
-    // 96 ä¸åŒäºŒå‰æœç´¢æ ‘ä¸ªæ•°
+    // 96 ²»Í¬¶ş²æËÑË÷Ê÷¸öÊı
     public int numTrees(int n) {
-        int[] res = new int[n + 1]; // java æ•°ç»„è¢«åˆå§‹åŒ–ä¸º0
+        int[] res = new int[n + 1]; // java Êı×é±»³õÊ¼»¯Îª0
         res[0] = 1;
         res[1] = 1;
         for(int i = 2;i <= n;i ++){
             for(int j = i;j > 0;j --){
-                res[i] += res[j - 1] * res[i - j]; // ä»¥ i ä¸ºæ ¹èŠ‚ç‚¹çš„äºŒå‰æ ‘ä¸ªæ•°
+                res[i] += res[j - 1] * res[i - j]; // ÒÔ i Îª¸ù½ÚµãµÄ¶ş²æÊ÷¸öÊı
             }
         }
         return res[n];
@@ -371,7 +429,7 @@ public class Solution {
         }
     }
 
-    // å››é‡å¾ªç¯ï¼Ÿä»¥åŠä¸‹æ ‡è¿˜æ²¡æœ‰æ­£ç¡®index.
+    // ËÄÖØÑ­»·£¿ÒÔ¼°ÏÂ±ê»¹Ã»ÓĞÕıÈ·index.
     public List<Integer> diffWaysToCompute2(String input){
         int N = input.length();
         List<Integer> numList = new ArrayList<>();
@@ -388,14 +446,14 @@ public class Solution {
                 num = num * 10 + c - '0';
             }
         }
-        numList.add(num); // æ·»åŠ æœ€åä¸€ä¸ªnum(æ²¡æœ‰åæ¥è¿ç®—ç¬¦)
+        numList.add(num); // Ìí¼Ó×îºóÒ»¸önum(Ã»ÓĞºó½ÓÔËËã·û)
 
 //        System.out.println(java.util.Arrays.toString(numList.toArray()));
 //        System.out.println(java.util.Arrays.toString(opList.toArray()));
 
         ArrayList<Integer>[][] dp = (ArrayList<Integer>[][]) new ArrayList[N][N];
 
-        ArrayList<Integer> res = new ArrayList<>(); // Array of arrayListæ˜¯ä¸å¯è¡Œçš„ã€‚=> arrayList of arrayList
+        ArrayList<Integer> res = new ArrayList<>(); // Array of arrayListÊÇ²»¿ÉĞĞµÄ¡£=> arrayList of arrayList
         for(int i = 0;i < N;i ++){
             for(int j = i;j > 0;j --){
                 for(int s = j;s < i; s ++){
@@ -414,8 +472,8 @@ public class Solution {
         return dp[0][N - 1];
     }
 
-    //241 åˆ†æ²»(é€’å½’)
-//    public Map<String, List<Integer>> map = new HashMap<>(); // å·²ç»è®¡ç®—è¿‡çš„å­—ç¬¦ä¸²
+    //241 ·ÖÖÎ(µİ¹é)
+//    public Map<String, List<Integer>> map = new HashMap<>(); // ÒÑ¾­¼ÆËã¹ıµÄ×Ö·û´®
 //    public List<Integer> diffWaysToCompute(String input){
 //        if(map.containsKey(input)) return map.get(input);
 //        int len = input.length();
@@ -442,7 +500,7 @@ public class Solution {
 //                }
 //            }
 //        }
-//        // é€’å½’åˆ°æ²¡æœ‰ç¬¦å·åªæœ‰æ•°å­—(ç»„åˆ)
+//        // µİ¹éµ½Ã»ÓĞ·ûºÅÖ»ÓĞÊı×Ö(×éºÏ)
 //        if(res.size() == 0) {
 //            System.out.println(input);
 //            res.add(Integer.valueOf(input));
@@ -451,7 +509,7 @@ public class Solution {
 //        return res;
 //    }
 
-    // 209 O(n) åŒæŒ‡é’ˆ
+    // 209 O(n) Ë«Ö¸Õë
     public int minSubArrayLen(int s, int[] nums) {
         int l = 0, r = 0;
         int len = nums.length;
@@ -473,10 +531,10 @@ public class Solution {
         return res == Integer.MAX_VALUE? 0: res;
     }
 
-    // 26 åŒå‘æŒ‡é’ˆ
+    // 26 Í¬ÏòÖ¸Õë
     public int removeDuplicates(int[] nums) {
         if(nums == null || nums.length == 0 ) return 0;
-        int l = 0, r = 1; // læŒ‡å‘æ–°æ•°ç»„ï¼Œrè¿­ä»£åŸå§‹æ•°ç»„ä¸­çš„æ‰€æœ‰å…ƒç´ 
+        int l = 0, r = 1; // lÖ¸ÏòĞÂÊı×é£¬rµü´úÔ­Ê¼Êı×éÖĞµÄËùÓĞÔªËØ
         while(r < nums.length){
             if(nums[l] != nums[r]){
                 l ++;
@@ -624,12 +682,12 @@ public class Solution {
 
 
 
-        // äºŒåˆ†æŸ¥æ‰¾
+        // ¶ş·Ö²éÕÒ
     public int peakIndexInMountainArray(int[] A) {
         int l = 0, r = A.length - 1;
         while(l < r){
             int mid = l + (r - l) / 2;
-            if(A[mid] < A[mid + 1]){ // åœ¨ä¸Šå¡
+            if(A[mid] < A[mid + 1]){ // ÔÚÉÏÆÂ
                 l = mid + 1; //
             }else{
                 r = mid;
@@ -681,7 +739,7 @@ public class Solution {
 
     }
 
-    // äºŒåˆ†çš„åŒºé—´èŒƒå›´æ˜¯ [max(weights), sum(weights)]
+    // ¶ş·ÖµÄÇø¼ä·¶Î§ÊÇ [max(weights), sum(weights)]
     public int shipWithinDays(int[] weights, int D) {
         int len = weights.length;
 //        int l = Arrays.stream(weights).max().getAsInt();
@@ -716,13 +774,13 @@ public class Solution {
             System.out.printf("%d %d\n",entry.getKey(), entry.getValue());
         }
 
-//        PriorityQueue<Integer> pq = new PriorityQueue<>((n1, n2) -> map.get(n2) - map.get(n1)); // å¤§é¡¶å †.
-        PriorityQueue<Integer> pq = new PriorityQueue<>((n1, n2) -> map.get(n1) - map.get(n2)); // é»˜è®¤æ˜¯n1 - n2,å°é¡¶å †
+//        PriorityQueue<Integer> pq = new PriorityQueue<>((n1, n2) -> map.get(n2) - map.get(n1)); // ´ó¶¥¶Ñ.
+        PriorityQueue<Integer> pq = new PriorityQueue<>((n1, n2) -> map.get(n1) - map.get(n2)); // Ä¬ÈÏÊÇn1 - n2,Ğ¡¶¥¶Ñ
         for(int key: map.keySet()){
-            pq.add(key); // ç¬¦åˆå †çš„æ’å…¥
+            pq.add(key); // ·ûºÏ¶ÑµÄ²åÈë
             if(pq.size() > k){
-                pq.poll(); // pollå †é¡¶å…ƒç´ 
-//                System.out.println(pq.poll()); // pollå †é¡¶å…ƒç´ 
+                pq.poll(); // poll¶Ñ¶¥ÔªËØ
+//                System.out.println(pq.poll()); // poll¶Ñ¶¥ÔªËØ
             }
         }
 //         Iterator it = pq.iterator();
@@ -745,7 +803,7 @@ public class Solution {
         PriorityQueue<String> q = new PriorityQueue<>(k, (w1, w2) -> map.get(w1).equals(map.get(w2)) ?
                 w2.compareTo(w1) : map.get(w1) - map.get(w2)); // minHeap
 //        PriorityQueue<String> q = new PriorityQueue<>(k, (o1, o2) -> map.get(o1) - map.get(o2)); // minHeap
-        // å¦‚æœè¶…è¿‡Init capacityä»ç„¶ä¼šç»§ç»­æ·»åŠ 
+        // Èç¹û³¬¹ıInit capacityÈÔÈ»»á¼ÌĞøÌí¼Ó
         for(String s: words){
             map.put(s, map.getOrDefault(s, 0) + 1);
         }
@@ -760,7 +818,7 @@ public class Solution {
         while(!q.isEmpty()){
             res.add(q.poll());
         }
-        Collections.reverse(res); // å¦‚æ­¤å€’è½¬
+        Collections.reverse(res); // Èç´Ëµ¹×ª
         return res;
     }
 
@@ -808,7 +866,7 @@ public class Solution {
         }); // maxHeap
         int N = Profits.length;
         Project[] projects = new Project[N];
-        // (å°é¡¶å †)æ‹¿å‡ºæ‰€æœ‰èµ„é‡‘å¯ä»¥åšçš„é¡¹ç›®ï¼Œæ”¾å…¥profitå¤§é¡¶å †
+        // (Ğ¡¶¥¶Ñ)ÄÃ³öËùÓĞ×Ê½ğ¿ÉÒÔ×öµÄÏîÄ¿£¬·ÅÈëprofit´ó¶¥¶Ñ
         for(int i = 0; i < N; i ++){
             projects[i] = new Project(Capital[i], Profits[i]);
         }
@@ -873,22 +931,22 @@ public class Solution {
             this.time = time;
         }
         public String toString(){
-            return this.position + "ï¼Œ"+ this.time;
+            return this.position + "£¬"+ this.time;
         }
     }
-    // å¦‚æœpositionåœ¨åé¢çš„è½¦èŠ±æ›´å°‘çš„æ—¶é—´èƒ½åˆ°è¾¾ç›®çš„åœ°ï¼Œé‚£ä¹ˆä¸€å®šåœ¨ä¸€ä¸ªè½¦é˜Ÿé‡Œ
-    // é—®åˆå‡ ä¸ªè½¦é˜Ÿï¼Œè€Œä¸æ˜¯ä¸€ä¸ªè½¦é˜Ÿå‡ è¾†è½¦
+    // Èç¹ûpositionÔÚºóÃæµÄ³µ»¨¸üÉÙµÄÊ±¼äÄÜµ½´ïÄ¿µÄµØ£¬ÄÇÃ´Ò»¶¨ÔÚÒ»¸ö³µ¶ÓÀï
+    // ÎÊÓÖ¼¸¸ö³µ¶Ó£¬¶ø²»ÊÇÒ»¸ö³µ¶Ó¼¸Á¾³µ
     public int carFleet(int target, int[] position, int[] speed) {
         int N = position.length;
         Car[] cars = new Car[N];
         for(int i = 0; i < N; i ++){
             cars[i] = new Car(position[i], (double)(target - position[i]) / speed[i]);
         }
-        Arrays.sort(cars, (c1, c2) -> c1.position - c2.position); // å°çš„åœ¨å‰ï¼Œä»å°åˆ°å¤§
-        System.out.println(Arrays.asList(cars).stream().map(e -> e.toString()).reduce("", String::concat)); // æ‰“å°array of Car object
+        Arrays.sort(cars, (c1, c2) -> c1.position - c2.position); // Ğ¡µÄÔÚÇ°£¬´ÓĞ¡µ½´ó
+        System.out.println(Arrays.asList(cars).stream().map(e -> e.toString()).reduce("", String::concat)); // ´òÓ¡array of Car object
         int res = 0, i = N - 1;
         for(i = N - 1; i > 0; i --){
-            if(cars[i].time < cars[i - 1].time){ // iæ—©åˆ°ï¼Œ i-1è¿½ä¸ä¸Šï¼Œåˆ†å¼€è½¦é˜Ÿ
+            if(cars[i].time < cars[i - 1].time){ // iÔçµ½£¬ i-1×·²»ÉÏ£¬·Ö¿ª³µ¶Ó
                 res += 1;
             } else {
                 cars[i - 1].time = cars[i].time;
@@ -903,10 +961,10 @@ public class Solution {
     public int[][] merge(int[][] intervals) {
         Arrays.sort(intervals,(l1, l2) -> l1[0] - l2[0]);
 
-//        .sorted(newÂ Comparator<int[]>(){
-//	Â Â Â Â Â Â Â Â Â Â Â Â publicÂ intÂ compare(int[]Â l1,Â int[]Â l2){
-//	Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â returnÂ l1[1]Â ==Â l2[1]Â ?Â l2[0]Â -Â l1[0]Â :Â l2[1]Â -Â l1[1]; // ä»é«˜åˆ°ä½c
-//Â Â Â Â Â Â Â Â Â Â Â Â }
+//        .sorted(new?Comparator<int[]>(){
+//	????????????public?int?compare(int[]?l1,?int[]?l2){
+//	????????????????return?l1[1]?==?l2[1]???l2[0]?-?l1[0]?:?l2[1]?-?l1[1]; // ´Ó¸ßµ½µÍc
+//????????????}
         System.out.println(intervals[0][0]);
         List<int[]> res = new ArrayList<>();
         for(int[] interval: intervals){
@@ -923,8 +981,8 @@ public class Solution {
         }
         return res.toArray(new int[res.size()][]);
     }
-    // 438 æ»‘çª—
-    public List<Integer> findAnagrams(String s, String p) { // èŠ±èŠ±
+    // 438 »¬´°
+    public List<Integer> findAnagrams(String s, String p) { // »¨»¨
         char[] arrS = s.toCharArray();
         char[] arrP = p.toCharArray();
         char[] need = new char[26];
@@ -935,14 +993,14 @@ public class Solution {
         System.out.println(Arrays.toString(need));
         List<Integer> res = new ArrayList<>();
         int left = 0, right = 0;
-        // offsetå¢å¤§
+        // offsetÔö´ó
         while(right < arrS.length){
             int cur = arrS[right] - 'a';
             window[cur] += 1;
             right ++;
             while(window[cur] > need[cur]){
                 System.out.println('h');
-                // startå·¦ç§»
+                // start×óÒÆ
                 int curL = arrS[left] - 'a';
                 window[curL] -= 1;
                 left ++;
@@ -961,14 +1019,14 @@ public class Solution {
 //        System.out.println(path.stream().map(Object::toString)
 //                .collect(Collectors.joining(", ")));
         Arrays.sort(candidates);
-        if(target == 0) res.add(new ArrayList(path)); // æ·±æ‹·è´ !!
+        if(target == 0) res.add(new ArrayList(path)); // Éî¿½±´ !!
         for(int i = idx; i < candidates.length; i ++){
             if(target - candidates[i] < 0){
                 break;
             } else {
                 // List<Integer> tmp = path;
                 path.add(candidates[i]);
-//                backtrack(i + 1, candidates, path, target - candidates[i]); // å…è®¸é‡å¤
+//                backtrack(i + 1, candidates, path, target - candidates[i]); // ÔÊĞíÖØ¸´
                 backtrack(i, candidates, path, target - candidates[i]);
                 path.remove(path.size() - 1);
             }
@@ -1009,7 +1067,7 @@ public class Solution {
     public int longestValidParentheses(String s) {
         if(s == null || s.length() == 0) return 0; // !
         Stack<Integer> stack = new Stack<>();
-        stack.push(-1); // è¾¹ç•Œï¼š s = "()";
+        stack.push(-1); // ±ß½ç£º s = "()";
         int res = 0;
         for(int i = 0; i < s.length();i ++){
             System.out.println(stack);
@@ -1046,7 +1104,7 @@ public class Solution {
         return maxArea;
     }
 
-    // 312 åŒºé—´åŠ¨å½’ 546æ¶ˆæ¶ˆä¹ å’Œ åŠ å·¦å³éš”æ¿84 æœ€å¤§çŸ©å½¢åŒºé—´
+    // 312 Çø¼ä¶¯¹é 546ÏûÏûÀÖ ºÍ ¼Ó×óÓÒ¸ô°å84 ×î´ó¾ØĞÎÇø¼ä
     public int maxCoins(int[] nums) {
         int N = nums.length;
         int[][] dp = new int[N + 2][N + 2];
@@ -1070,9 +1128,9 @@ public class Solution {
 
     // 41
     public int firstMissingPositive(int[] nums) {
-        // åŸåœ°hashä½¿æ•°ç»„æ»¡è¶³nums[i] == nums[nums[i]-1].i.e 4 åœ¨ nums[3]
+        // Ô­µØhashÊ¹Êı×éÂú×ãnums[i] == nums[nums[i]-1].i.e 4 ÔÚ nums[3]
         for(int i = 0;i < nums.length;i ++){
-            while(nums[i] > 0 && nums[i] <= nums.length && nums[i] != nums[nums[i] - 1]){//äº¤æ¢nums[i]åˆ°æœ€ç»ˆä½ç½®
+            while(nums[i] > 0 && nums[i] <= nums.length && nums[i] != nums[nums[i] - 1]){//½»»»nums[i]µ½×îÖÕÎ»ÖÃ
                 swap(nums, i, nums[i] - 1);
             }
         }
@@ -1080,10 +1138,10 @@ public class Solution {
         for(int i = 0;i < nums.length;i ++){
             if(nums[i] != i + 1) return i + 1;
         }
-        return nums.length + 1;//è‡ªå·±è€ƒè™‘è¿™ç§æƒ…å†µ
+        return nums.length + 1;//×Ô¼º¿¼ÂÇÕâÖÖÇé¿ö
     }
 
-    public void swap(int[] nums, int idxa, int idxb){ // æ³¨æ„swapçš„å¼•ç”¨ä¼ é€’
+    public void swap(int[] nums, int idxa, int idxb){ // ×¢ÒâswapµÄÒıÓÃ´«µİ
         int tmp = nums[idxa];
         nums[idxa] = nums[idxb];
         nums[idxb] = tmp;
@@ -1134,7 +1192,7 @@ public class Solution {
     public boolean isPalindrome(String s) {
 
         StringBuilder sb = new StringBuilder();
-        char[] sArr = s.toLowerCase().toCharArray(); // toCharArrä¼šå»æ‰ç©ºæ ¼
+        char[] sArr = s.toLowerCase().toCharArray(); // toCharArr»áÈ¥µô¿Õ¸ñ
         for(char c: sArr){
             if(Character.isLetterOrDigit(c)) sb.append(c);
         }
@@ -1150,7 +1208,7 @@ public class Solution {
         int N = s.length();
         boolean[] dp = new boolean[N];
         for(int r = 0; r < N;r ++){
-            if(wordSet.contains(s.substring(0, r + 1))){ // æ‰€æœ‰substring r + 1ä»è€Œå–åˆ°r
+            if(wordSet.contains(s.substring(0, r + 1))){ // ËùÓĞsubstring r + 1´Ó¶øÈ¡µ½r
                 dp[r] = true;
                 continue;
             }
@@ -1232,7 +1290,7 @@ public class Solution {
 
     // 44
     public boolean matches(int i, int j, String s, String p){
-        if(i == 0) return false; // ä¸è¦è®©ä»–å»æ‰¾i - 1å’Œj - 1
+        if(i == 0) return false; // ²»ÒªÈÃËûÈ¥ÕÒi - 1ºÍj - 1
         if(j == 0) return false;
         if(p.charAt(j - 1) == '?') return true;
         return s.charAt(i - 1) == p.charAt(j - 1);
@@ -1264,7 +1322,7 @@ public class Solution {
     // 93
     public List<String> restoreIpAddresses(String s) {
         List<String> res = new ArrayList<>();
-        if(s.length() > 12) return res; // ç”¨ä¾‹ 11..1 (1008ä¸ª1)
+        if(s.length() > 12) return res; // ÓÃÀı 11..1 (1008¸ö1)
         dfs(s, 0, new ArrayList<>(), res);
         return res;
     }
@@ -1280,7 +1338,7 @@ public class Solution {
             res.add(sb.toString());
             return;
         }
-        // å¦‚æœè¿˜æ²¡æœ‰æ‰¾åˆ° 4 æ®µ IP åœ°å€å°±å·²ç»éå†å®Œäº†å­—ç¬¦ä¸²ï¼Œé‚£ä¹ˆæå‰å›æº¯
+        // Èç¹û»¹Ã»ÓĞÕÒµ½ 4 ¶Î IP µØÖ·¾ÍÒÑ¾­±éÀúÍêÁË×Ö·û´®£¬ÄÇÃ´ÌáÇ°»ØËİ
 
         if(segStart == s.length()){
             System.out.println(segStart);
@@ -1317,11 +1375,11 @@ public class Solution {
     public String dfs(int n, int k, int start, StringBuilder sb, boolean[] used){
 //        System.out.println(sb.toString());
 
-        if(start == n) return sb.toString(); // start å¯ç†è§£ä¸ºå½“å‰å±‚æ•°
+        if(start == n) return sb.toString(); // start ¿ÉÀí½âÎªµ±Ç°²ãÊı
         int cur = factorial(n - start - 1);
         for(int i = 0;i < n ;i ++){
             if(used[i] == true) continue;
-            if(cur < k){ //å½“å‰çš„æ’åˆ—ç»„åˆæ•°å°äºkï¼Œè¯´æ˜å°±ç®—è¿™ä¸€å±‚æ’å®Œäº†ï¼Œä¹Ÿåˆ°ä¸äº†ç¬¬kä¸ªï¼Œå‰ª
+            if(cur < k){ //µ±Ç°µÄÅÅÁĞ×éºÏÊıĞ¡ÓÚk£¬ËµÃ÷¾ÍËãÕâÒ»²ãÅÅÍêÁË£¬Ò²µ½²»ÁËµÚk¸ö£¬¼ô
                 k -= cur;
                 continue;
             }
@@ -1412,7 +1470,7 @@ public class Solution {
         return dp[M][N];
     }
 
-    // 546 æ¶ˆæ¶ˆä¹
+    // 546 ÏûÏûÀÖ
     public int removeBoxes(int[] boxes){
         int[][][] dp = new int[100][100][100];
         return cal(boxes, dp, 0, boxes.length - 1, 0);
@@ -1522,7 +1580,7 @@ public class Solution {
             return;
         }
         for(int i = start;i < s.length();i ++){
-            if(i != start && s.charAt(i) == s.charAt(i - 1)) continue;// å‰ªæï¼š"))"ä¸­åˆ é™¤å‰ä¸€ä¸ªå’Œåä¸€ä¸ªæ— åŒºåˆ«
+            if(i != start && s.charAt(i) == s.charAt(i - 1)) continue;// ¼ôÖ¦£º"))"ÖĞÉ¾³ıÇ°Ò»¸öºÍºóÒ»¸öÎŞÇø±ğ
             if(s.charAt(i) == '(' || s.charAt(i) == ')'){
                 if(r > 0 && s.charAt(i) == ')') dfs(s.substring(0, i) + s.substring(i + 1), i, l, r - 1);
                 if(l > 0 && s.charAt(i) == '(') dfs(s.substring(0, i) + s.substring(i + 1), i, l - 1, r);
@@ -1535,7 +1593,7 @@ public class Solution {
         for(char c: s.toCharArray()){
             if(c == '(') cnt ++;
             if(c == ')') cnt --;
-            if(cnt < 0) return false;//å³æ‹¬å·å¤šäºå·¦æ‹¬å·
+            if(cnt < 0) return false;//ÓÒÀ¨ºÅ¶àÓÚ×óÀ¨ºÅ
         }
         return cnt == 0;
     }
@@ -1555,10 +1613,10 @@ public class Solution {
         }
         return res;
     }
-    // idx æŒ‡é’ˆåç§»ä»£æ›¿æ•°å­—è½¬
+    // idx Ö¸ÕëºóÒÆ´úÌæÊı×Ö×ª
     public int getWinner(int[] arr, int k) {
         int res = arr[0];
-        k = Math.min(k, arr.length);// ç®€åŒ–åˆ¤æ–­
+        k = Math.min(k, arr.length);// ¼ò»¯ÅĞ¶Ï
 
         int idx = 1, cnt = 0;
         while(idx < arr.length && cnt < k){
@@ -1572,7 +1630,7 @@ public class Solution {
         }
         return res;
     }
-// é”™çš„è§£
+// ´íµÄ½â
 //    public int getWinner(int[] arr, int k) {
 //        int N = arr.length;
 //        int max = Integer.MIN_VALUE;
@@ -1675,7 +1733,7 @@ private void swap(char[] nums, int i, int j) {
         nums[j] = temp;
     }
 
-    // å‘¨èµ› 201
+    // ÖÜÈü 201
     public String makeGood(String s) {
         StringBuilder sb = new StringBuilder();
         for(char c : s.toCharArray()){
@@ -1694,7 +1752,7 @@ private void swap(char[] nums, int i, int j) {
 
         int i = N - 1;
         while(i > 0 && nums[i - 1] >= nums[i]) i --;
-        if(i >= 1){ // ä¸æ˜¯æœ€åä¸€ä¸ªæ’åˆ—
+        if(i >= 1){ // ²»ÊÇ×îºóÒ»¸öÅÅÁĞ
             int min = i;
 
             for(int j = i; j < N;j ++){
@@ -1726,7 +1784,7 @@ private void swap(char[] nums, int i, int j) {
 
     // jian 66
     public double[] twoSum(int n){
-        int[][] dp = new int[n + 1][6 * n + 1]; // å·²æŠ›ç¬¬nä¸ªç­›å­ï¼Œ å‡ºç°æŸç‚¹æ•°çš„æ¬¡æ•°
+        int[][] dp = new int[n + 1][6 * n + 1]; // ÒÑÅ×µÚn¸öÉ¸×Ó£¬ ³öÏÖÄ³µãÊıµÄ´ÎÊı
         for (int i = 1; i <= 6 ; i++) {
             dp[1][i] = 1;
         }
@@ -1769,7 +1827,7 @@ private void swap(char[] nums, int i, int j) {
             index.addLast(i);
             System.out.println(Arrays.toString(index.toArray()));
             // if(index.size() > 0)
-            res[i - k + 1] = nums[index.getFirst()]; // é˜Ÿé¦–å°¾æœ€å¤§å…ƒç´ 
+            res[i - k + 1] = nums[index.getFirst()]; // ¶ÓÊ×Î²×î´óÔªËØ
             // else res[i - k + 1] = nums[i];
 
             if(index.getFirst() == i - k + 1) index.removeFirst();
@@ -1785,7 +1843,7 @@ private void swap(char[] nums, int i, int j) {
         String res = "";
         for(int i = N - 1;i >= 0;i --){
             System.out.println(strings[i]+ ".");
-            if(strings[i].equals("")) continue;  // "a good   example"ä¼šåˆ†å‰²å‡ºstrings[i]==null
+            if(strings[i].equals("")) continue;  // "a good   example"»á·Ö¸î³östrings[i]==null
         }
         return res.trim();
     }
@@ -1828,14 +1886,14 @@ private void swap(char[] nums, int i, int j) {
         int N = pairs.length;
         int[] dp = new int[N];
         Arrays.fill(dp, 1);
-        Arrays.sort(pairs,(a, b) -> a[0] - b[0]); // sortä¸ºäº†å‡å°‘éå†æ¬¡æ•°
+        Arrays.sort(pairs,(a, b) -> a[0] - b[0]); // sortÎªÁË¼õÉÙ±éÀú´ÎÊı
         for(int i = 1;i < N;i ++){
             for(int j = 0;j < N;j ++){
                 if(pairs[j][1] < pairs[i][0]) dp[i] = Math.max(dp[i], dp[j] + 1);
             }
         }
 //        System.out.println(Arrays.toString(dp));
-        return Arrays.stream(dp).max().getAsInt(); // ä¸æ˜¯æœ€åä¸€ä¸ªè€Œæ˜¯
+        return Arrays.stream(dp).max().getAsInt(); // ²»ÊÇ×îºóÒ»¸ö¶øÊÇ
     }
 
     // 647
@@ -1846,7 +1904,7 @@ private void swap(char[] nums, int i, int j) {
 //        for(int i = 0;i < N;i ++){ // ->j
 //            for(int j = i;j < N;j ++){ // ->i
         for(int j = 0;j < N;j ++){
-            for(int i = 0;i <= j;i ++){ // ä¸ºäº†æ¥å—å·¦ä¸‹åˆ°å³ä¸Šçš„æ›´æ–°ï¼Œå…ˆè¡Œååˆ—çš„æ›´æ–°é¡ºåºé”™äº†
+            for(int i = 0;i <= j;i ++){ // ÎªÁË½ÓÊÜ×óÏÂµ½ÓÒÉÏµÄ¸üĞÂ£¬ÏÈĞĞºóÁĞµÄ¸üĞÂË³Ğò´íÁË
                 if(s.charAt(i) == s.charAt(j) && (j - i < 2 || dp[i + 1][j - 1])){
                     dp[i][j] = true;
                     System.out.printf("%d %d\n", i, j);
@@ -1904,7 +1962,7 @@ private void swap(char[] nums, int i, int j) {
                     stack.addLast(tmp);
                     System.out.println(stack.toString());
                 }else if(lastOp == '-'){
-                    stack.addLast(-tmp); // è®°ä½æ˜¯addLast ä¸æ˜¯push
+                    stack.addLast(-tmp); // ¼Ç×¡ÊÇaddLast ²»ÊÇpush
                 }else{
                     stack.addLast(calc(stack.removeLast(), tmp, lastOp));
                 }
@@ -1985,7 +2043,7 @@ private void swap(char[] nums, int i, int j) {
             } else if(i == 0 && c == '+'){
                 flag = flag;
             } else if(c >= '0' && c <= '9'){
-                if(res > (Integer.MAX_VALUE - c + '0') / 10){ // å¦‚æœå¤§äºMAX_VALUEæˆ–åªèƒ½è¿™æ ·æ¯”è¾ƒ
+                if(res > (Integer.MAX_VALUE - c + '0') / 10){ // Èç¹û´óÓÚMAX_VALUE»òÖ»ÄÜÕâÑù±È½Ï
                     return flag == -1 ? Integer.MIN_VALUE : Integer.MAX_VALUE;
                 }
                 res = res * 10 + c - '0';
@@ -1995,6 +2053,61 @@ private void swap(char[] nums, int i, int j) {
         }
         res = res * flag;
         return res;
+    }
+    // 542
+//    public int[][] updateMatrix(int[][] matrix) {
+//        Queue<Integer> q = new ArrayDeque<>();
+//
+//
+//    }
+
+    // 715
+    TreeMap<Integer, Integer> tm;
+
+    public Solution() {
+        tm = new TreeMap<>();
+    }
+
+    public void addRange(int left, int right) {
+        if(left >= right) return;
+        Integer start = tm.floorKey(left); // ¿ÉÄÜÓĞnull·µ»ØÖµ
+        if(start == null) start = tm.ceilingKey(left);
+        while(start != null && start <= right){
+            int end = tm.get(start);
+            if(end >= left){
+                tm.remove(start);
+                if(start < left) left = start;
+                if(end > right) right = end;
+            }
+            start = tm.ceilingKey(end);
+        }
+        System.out.printf("%d, %d\n", left, right);
+        tm.put(left, right);
+    }
+
+    public boolean queryRange(int left, int right) {
+        Integer start = tm.floorKey(left);
+        if(start == null) return false;
+        // if(tm.get(start) < right) return false;
+        return tm.get(start) >= right;
+    }
+
+    public void removeRange(int left, int right) {
+        if(left >= right) return;
+        Integer start = tm.floorKey(left);
+        if(start == null) start = tm.ceilingKey(left);
+
+        while(start != null && start < right){
+//            System.out.println(start);
+            int end = tm.get(start);
+            if(end >= left){
+                tm.remove(start);
+                if(start < left) tm.put(start, left);
+                if(end > right) tm.put(right, end);
+            }
+            start = tm.ceilingKey(end);
+//            System.out.printf("%d, %d\n",start, end);
+        }
     }
 
 
@@ -2028,7 +2141,7 @@ private void swap(char[] nums, int i, int j) {
 //        int[] nums = {0, 0, 0, 0};
 //        System.out.println(s.threeSum(nums));
 //        String str = "leetcode";
-//        List<String> wordDict = new ArrayList<>(Arrays.asList("leet", "code")); // Listèµ‹å€¼
+//        List<String> wordDict = new ArrayList<>(Arrays.asList("leet", "code")); // List¸³Öµ
 //        System.out.println(s.wordBreak(str, wordDict));
 //
 //        int[][] grid = {{0, 0, 0, 0}};
@@ -2086,7 +2199,7 @@ private void swap(char[] nums, int i, int j) {
 //        System.out.println(s.subsetsWithDup(nums));
 //        int[] nums = {1, 1, 2};
 //        System.out.println(s.permuteUnique(nums));
-        System.out.println(s.getPermutation(3, 1));
+        // System.out.println(s.getPermutation(3, 1));
 //        System.out.println(s.getPermutation(3, 2));
 //        System.out.println(s.getPermutation(3, 3));
 //        System.out.println(s.getPermutation(4, 2));
@@ -2099,8 +2212,8 @@ private void swap(char[] nums, int i, int j) {
 //        List<String> dic = new ArrayList(Arrays.asList("apple", "pen", "applepen", "pine", "pineapple"));
 //        System.out.println(s.wordBreak2("pineapplepenapple", dic));
 
-//        String[] in = {"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"};
-//        System.out.println(s.evalRPN(in));
+    //    String[] in = {"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"};
+    //    System.out.println(s.evalRPN(in));
 
 //        int[] indices = {1, 0, 2};
 //        System.out.println(s.restoreString("art", indices));
@@ -2212,5 +2325,27 @@ private void swap(char[] nums, int i, int j) {
 //        String[] words = {"foo","bar"};
 //        System.out.println(s.findSubstring("barfoothefoobarman", words));
 
+//        char[][] grid = {{'1','1','1','1','0'},{'1','1','0','1','0'},{'1','1','0','0','0'},{'0','0','0','0','0'}};
+//        System.out.println(s.numIslands(grid));
+
+//        char[][] board = {{'X','X','X','X'},{'X','O','O','X'},{'X','X','O','X'},{'X','O','X','X'}};
+//        s.solve(board);
+//        for (int i = 0; i < board.length; i++) {
+//            System.out.println(board[i]);
+//        }
+//        String s0 = "123";
+//        StringBuilder sb = new StringBuilder(s0);
+//        System.out.println(sb.reverse());
+//        System.out.println(sb.equals(sb.reverse()));
+        s.addRange(6, 8);
+        s.removeRange(7, 8);
+        s.removeRange(8, 9);
+        s.addRange(8, 9);
+        s.removeRange(1, 3);
+        s.addRange(1, 8);
+        s.queryRange(2, 4);
+        System.out.println(s.queryRange(2, 9));
+        s.queryRange(4, 6);
     }
+
 }
